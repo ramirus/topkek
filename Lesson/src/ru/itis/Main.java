@@ -8,10 +8,13 @@ public class Main {
 
         int a=scanner.nextInt();
         int b=scanner.nextInt();
+
         int i=a;
-        while(i<=b){
-            system.out.println(i+ " ");
-            i++;
-        }
+//        while(i<=b){
+//            system.out.println(i+ " ");
+//            i++;
+//        }
+    }for(int i=a; i<=b; i++){
+        System.out.println(i + " ");
     }
 }
