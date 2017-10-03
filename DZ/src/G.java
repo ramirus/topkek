@@ -22,7 +22,7 @@ public class G {
                     t*= k;
                 }
              S=S+power( x , k)/t;
-
+  // те же замечания
         }
         System.out.println(S);
     }
