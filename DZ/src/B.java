@@ -21,7 +21,7 @@ public class B {
             for(k= 2; k<=n; k++){t*=(2*k);}
             S = S + ((-1)*p*power(x,4*k+1))/(t*(4*k+1));
             p=-p;
-
+         // те же замечания
         }
         System.out.println(S);
     }
