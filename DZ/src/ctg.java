@@ -10,6 +10,8 @@ public class ctg{
         n=sc.nextInt();
         for(i=1;i<=n;i++) {
             t=t+(1/l);
+      /*      1) в задаче нет никаких тангенсов
+            2) значение не меняется    */
         }
         System.out.println(t);
     }
