@@ -7,7 +7,7 @@ public class k{
         double v=1;
           n=sc.nextInt();
         for(i=1;i<=n;i++) {
-            v=v*Math.tan(i);
+            v=v*Math.tan(i);  //здесь должно быть произведение произведений
         }
         System.out.println(v);
     }
