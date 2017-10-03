@@ -1,7 +1,7 @@
 import java.util.Scanner;
 // 10 a
 public class A {
-    public static int power(int a, int b){
+    public static int power(int a, int b){  // плохой прием
         int result = 1;
         for(int i=b; i>0; i--){
             result *= a;
@@ -18,7 +18,7 @@ public class A {
         x=sc.nextInt();
         for(k=0; k <=n; k++) {
 
-            for(k= 2; k<=n; k++){t*=k;}
+            for(k= 2; k<=n; k++){t*=k;} // плохой прием плюс переполнение
                 S = S + ((-1)*p*power(x, 2*k+1))/(t*(2*k+1));
             p=-p;
 
