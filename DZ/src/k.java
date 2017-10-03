@@ -1,5 +1,5 @@
 import  java.util.Scanner;
-
+//11 б
 public class k{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
