@@ -19,6 +19,7 @@ public class G {
         System.out.println("Введите х");
         x=sc.nextInt();
         for(k=1; k <=2*n; k++) {
+
             t=1;
             int temp=(int)k;
             if(k%2==0)
@@ -30,6 +31,13 @@ public class G {
 
 
             S=S+power( x , k)/t;
+
+
+            for(k= 2; k<=n; k++){
+                if (k%2 !=0)
+                    t*= k;
+                }
+             S=S+power( x , k)/t;
 
         }
         System.out.println(S);
