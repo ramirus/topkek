@@ -1,14 +1,15 @@
 import  java.util.Scanner;
-//11 б
-public class k{
-    public static void main(String[] args){
+//11 г
+public class k {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n, i=1 ;
-        double v=1;
-          n=sc.nextInt();
-        for(i=1;i<=n;i++) {
-            v=v*Math.tan(i);  //здесь должно быть произведение произведений
+        int n, i = 1;
+        double v = 1, l = (Math.sin(i) / Math.cos(i));
+        n = sc.nextInt();
+        for (i = 1; i <= n; i++) {
+            v = v * l;
+            l *= l;
+            System.out.println(v);
         }
-        System.out.println(v);
     }
 }
