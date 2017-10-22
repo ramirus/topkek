@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class _23_b {
     public static  void main(String[]args){
         Scanner sc=new Scanner(System.in);
-        int k=2,b,a,x, p=-1;
+        int k=2,b,a,x, p=1;
         System.out.println("введите а");
         a=sc.nextInt();
         System.out.println("введите b");
