@@ -8,6 +8,8 @@ public class _7_ {
             n++;
         }
         System.out.println(n);
+
+
     }
 }
 
