@@ -9,7 +9,7 @@ public class asd {
         x=sc.nextInt();
         while(Math.abs(t)>ep){
             G+=t;
-            t*=p*x*x/(2.0*n);
+            t*=p*x*x/(2.0*n);// факториал неверно считается
             n++;
             p=-p;
         }

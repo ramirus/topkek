@@ -22,8 +22,8 @@ public class D {
             t=1;
             m=1;
             int temp=(int)k*2;
-            for(int temp1=2;temp1<=temp;temp1+=2){t*=temp1; System.out.println("t" +t); }
-            for(temp=1;temp<=2*k-1;temp+=2) {m*=temp; System.out.println("m" +m);}
+            for(int temp1=2;temp1<=temp;temp1+=2){t*=temp1; System.out.println("t" +t); } //!!!!!
+            for(temp=1;temp<=2*k-1;temp+=2) {m*=temp; System.out.println("m" +m);}   //!!!!!!!!!!!!
 
             S=S+(power( x , 2*k)*m)/t;
             System.out.println("S" +S);
