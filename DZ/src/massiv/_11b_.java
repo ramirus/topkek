@@ -1,7 +1,8 @@
-package _1810_;
+package massiv;
+//11b
 import java.util.Scanner;
 import java.util.Random;
-public class _1a_ {
+public class _11b_ {
     public static void main(String[]args){
         int n;
         Scanner sc=new Scanner(System.in);
@@ -16,11 +17,11 @@ public class _1a_ {
         }
         for(int i=1; i<=n-1; i++){
             y[i]=a[i+1];
-                    System.out.print(y[i]+ a[n-1]+" ");
+            System.out.print(y[i]+ a[n-1]+" ");
         }
         for(int i=1; i<=n-1; i++){
             z[i]=a[i-1];
-                    System.out.print(a[n-1]+ z[i]);
+            System.out.print(a[n-1]+ z[i]);
         }
     }
 }
