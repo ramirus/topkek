@@ -8,7 +8,7 @@ public class _15_ {
         n=sc.nextInt();
         while(n!=0){
             if(((n%10)%2)==1){
-               k=n%10;
+                k=n%10;
                 System.out.print(k);
                 n=n/10;
             }
