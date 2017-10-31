@@ -1,4 +1,4 @@
-package massiv;
+package massiv;//-
 
 import java.util.Random;
 import java.util.Scanner;
@@ -82,4 +82,4 @@ public class _zadacha_8_3_ {
 
         System.out.println(' ');
     }
-}
+}   //опять принты
