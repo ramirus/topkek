@@ -1,4 +1,4 @@
-package _20d_28_29b_30a_32b;
+package _20d_28_29b_30a_32b; //-
 
 import java.util.Scanner;
 public class _28_ {
@@ -10,7 +10,7 @@ public class _28_ {
         x=sc.nextDouble();
         a0=x;
         b0=1.0-x;
-        while((b<=ep)&&(a<=Math.sqrt(x))){
+        while((b<=ep)&&(a<=Math.sqrt(x))){ //неверное условие
         a=a0*(1.0+b0/2.0);
         b=b0*b0*(3.0+b0);
         a0=a;
