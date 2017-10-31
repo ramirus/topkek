@@ -11,6 +11,7 @@ public class _zadacha_8_3_ {
         System.out.print("введите n");
         m = sc.nextInt();
         int[] s = new int[m];
+        int[] s1 = new int[m];
         int[] t = new int[m];
         int[] t1 = new int[m];
         int[] t2 = new int[m];
@@ -28,11 +29,6 @@ public class _zadacha_8_3_ {
         System.out.println(' ');
 
         for (int k = 0; k < m; k++) {
-            t2[k] = r.nextInt(2);
-            System.out.print(t2[k] + " ");
-        }
-        System.out.println(' ');
-        for (int k = 0; k < m; k++) {
             q = s[k];
             for (int i = 0; i < m; i++) {
                 if (q == t[i]) {
@@ -41,6 +37,16 @@ public class _zadacha_8_3_ {
             }
             if (t1[k] == 1) ;
             System.out.print(t1[k] + " ");
+        }
+        for (int k = 0; k < m; k++) {
+            q = s[k];
+            for (int i = 0; i < m; i++) {
+                if (q == t[i]) {
+                    t2[k] = 1;
+                }
+            }
+            if (t2[k] == 1) ;
+            System.out.print(t2[k] + " ");
         }
         System.out.println(" ");
         System.out.println("пересечение векторов ");
@@ -67,10 +73,9 @@ public class _zadacha_8_3_ {
         System.out.println("разность векторов ");
         for (int k = 0; k < m; k++) //разность векторов
         {
-            if (t1[k] == t2[k] && t1[k] == 1) {
-                System.out.print("0 ");
-            }
-            else{
+            if (t1[k] == 1 && t2[k] == 0) {
+                System.out.print("1 ");
+            } else {
                 System.out.print("0 ");
             }
         }
