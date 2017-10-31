@@ -1,4 +1,4 @@
-package _14_23_24;
+package _14_23_24;//-
 import java.util.Scanner;
 public class _24b_ {
     public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class _24b_ {
         b1 = Math.cos(x);
         while ((k <= n) || (Math.abs(c) >= ep)) {
             t = b / n;
-            S += p * t;
+            S += p * t;  //там же через 1
             b = (b1 * b0) - (c1 * c0);
             c = c0 * b1 + c1 * b0;
             c0 = c;
