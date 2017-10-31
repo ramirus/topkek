@@ -1,5 +1,5 @@
 
-import java.util.Random;
+import java.util.Random;//-
 import java.util.Scanner;
 
 public class _zadacha_8_2_ {
@@ -83,6 +83,6 @@ public class _zadacha_8_2_ {
                 System.out.print(t1[k] + " ");
             else System.out.print('0' + " ");
         }
-    }
+    }   //откуда какие-то принты?
 }
 
