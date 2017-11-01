@@ -1,4 +1,4 @@
-package massiv;
+package massiv;//-
 
 import java.util.Random;
 import java.util.Scanner;
@@ -33,10 +33,10 @@ public class _zadacha_2_ {
                 S += a[i];
             }
         } else {
-            for (int i = l; i >= g; i--) {
+            for (int i = l; i >= g; i--) {  //знак наоборот
                 S += a[i];
             }
-            System.out.println(S);
+            System.out.println(S); // предполагалось, что сами границы не входят
         }
     }
 }

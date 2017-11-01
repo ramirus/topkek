@@ -1,4 +1,4 @@
-package massiv;
+package massiv;//-
 import java.util.Random;
 import java.util.Scanner;
 public class _zadacha_1_ {
@@ -18,7 +18,7 @@ public class _zadacha_1_ {
                 c=a[i];
             }
             if(c==a[i]) {
-            k++;}
+            k++;}   //неверно, попробуйте массив типа 5 5 5 4 4 4 3 3 3 1 1 1
         }
         System.out.println(k);
     }
