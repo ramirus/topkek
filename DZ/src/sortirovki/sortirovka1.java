@@ -5,26 +5,39 @@ import java.util.Scanner;
 
 public class sortirovka1 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Random r = new Random();
-        int n, c;
-        n = sc.nextInt();
+
+        Scanner sc= new Scanner(System.in);
+        Random ran = new Random();
+
+        int n = sc.nextInt(), max = 0, r = 0, b = 0;
         int[] a = new int[n];
-        for(int i=0; i<a.length; i++){
-            a[i]=r.nextInt(10);
-            System.out.print(a[i]+" ");
+
+
+        for (int i = 0; i < n; i++) {
+            a[i] = ran.nextInt(10);
+            System.out.print(a[i] + " ");
         }
 
         System.out.println(" ");
-        for (int i = 0; i < a.length; i++) {
-            for (int k = i + 1; k < a.length; k++) {
-                if (a[i] < a[k]) {
-                    c = a[i];
-                    a[i] = a[k];
-                    a[k] = c;
+
+
+        for (int i = 0; i < n; i++) {
+            max = a[i];
+            r = i;
+            for (int j = i+1; j < n; j++) {
+                if (a[j] >= max) {
+                    max = a[j];
+                    r = j;
                 }
             }
-            System.out.print(a[i]);
+            b = a[r];
+            a[r] = a[i];
+            a[i] = b;
+
+        }
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(a[i] + " ");
         }
     }
 }

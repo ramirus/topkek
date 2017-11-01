@@ -4,32 +4,40 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class sort4 {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            Random ran = new Random();
 
-    public static void main(String[] args) {
-        Scanner q = new Scanner(System.in);
-        Random r = new Random();
-        int n, k, g;
-        System.out.println("Entering N");
-        n = q.nextInt();
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = r.nextInt(10);
-        }
-        for (int i = 0; i < n; i++) {
-            System.out.print(a[i] + " ");
-        }
-        System.out.println();
-        for (k = 0; k < n; k++) {
-            for (int i = k + 1; i < n; i++) {
-                if (a[k]>a[i]){
-                    g = a[i];
-                    a[i]= a[k];
-                    a[k]=g;
+            int n = sc.nextInt(), min = 0, r = 0, b = 0;
+            int[] a = new int[n];
+
+
+            for (int i = 0; i < n; i++) {
+                a[i] = ran.nextInt(10);
+                System.out.print(a[i] + " ");
+            }
+
+            System.out.println(" ");
+
+
+            for (int i = (n - 1); i >= 0; i--) {
+                min = a[i];
+                r = i;
+                for (int j = i - 1; j >= 0; j--) {
+                    if (a[j] <= min) {
+                        min = a[j];
+                        r = j;
+                    }
                 }
+                b = a[i];
+                a[i] = a[r];
+                a[r] = b;
+            }
+
+            for (int i = 0; i < n; i++)
+
+            {
+                System.out.print(a[i] + " ");
             }
         }
-        for (int i = 0; i < n; i++) {
-            System.out.print(a[i] + " ");
-        }
     }
-}
