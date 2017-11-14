@@ -1,4 +1,4 @@
-package massiv;
+package massiv;  //странный код, он даже не компилируется
 //13 3
 public class _zadacha_13_3_ {
     public static void main(String[] args) {
