@@ -1,4 +1,4 @@
-package ispravlenie;
+package ispravlenie;//- ничего не поняла
 
 import java.util.Random;
 import java.util.Scanner;
