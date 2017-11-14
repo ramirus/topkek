@@ -1,4 +1,4 @@
-package massiv;
+package massiv;//+-
 import java.util.Scanner;
 import java.util.Random;
 public class _zadacha22_5_ {
@@ -14,14 +14,14 @@ public class _zadacha22_5_ {
             System.out.print(a[i]+" ");
         }
         boolean l;
-        for(int i=0; i<a.length; i++){
+        for(int i=0; i<a.length; i++){  //плохо, что циклы не зависят от булевской переменной
             l=true;
-            for(int j=0; j<a.length; j++){
+            for(int j=0; j<a.length; j++){//плохо, что циклы не зависят от булевской переменной
                 if(a[i]==a[j]&&i!=j){
                     l=false;
                 }
             }
-            if(l==true){
+            if(l==true){   //  if(l)
                 t++;
             }
         }
