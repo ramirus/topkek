@@ -1,4 +1,4 @@
-package ispravlenie;
+package ispravlenie;//- а где векторы-то?
 
 import java.util.Random;
 import java.util.Scanner;
