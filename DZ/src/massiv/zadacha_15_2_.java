@@ -1,4 +1,4 @@
-package massiv;
+package massiv;//- не понятно, что вообще здесь считается.
 
 import java.util.Scanner;
 import java.util.Random;
