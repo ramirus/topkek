@@ -31,7 +31,7 @@ public class dvumernie_4_ {
         }
         showMatrix(matrix);
         for(int k=0; k<matrix.length;k++) {
-            for (int i = 0; i <= matrix.length - 1; i++) {
+            for (int i = 0; i < matrix.length ; i++) {
                 for (int j = 0; j < matrix[i].length - 1; j++) {
                     if (matrix[i][j] < matrix[i][j + 1]) {
                         t = matrix[i][j];
