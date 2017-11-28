@@ -1,4 +1,4 @@
-package DvumernieMassive;
+package DvumernieMassive;//-
 
 import java.util.Random;
 import java.util.Scanner;
@@ -31,7 +31,7 @@ public class zadachiMass_4_ {
         for (int i = 0; i < matrix.length; i++) {
             f = false;
             for (int j = 0; j < matrix[i].length && !f; j++) {
-                b[j] = matrix[i][j];
+                b[j] = matrix[i][j];                               //I did not understand your idea
                 for (int k = 0; k < matrix.length; k++) {
                     if (b[j] == matrix[k][0]) {
                         l++;
