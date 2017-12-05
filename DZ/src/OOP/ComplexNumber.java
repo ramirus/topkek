@@ -1,4 +1,4 @@
-package OOP;
+package OOP;//-
 
 //051
 public class ComplexNumber {
@@ -42,7 +42,7 @@ public class ComplexNumber {
 
     public ComplexNumber mult(ComplexNumber complexNumber) {
         ComplexNumber pl = new ComplexNumber();
-        pl.a = (complexNumber.a + complexNumber.b) * this.a;
+        pl.a = (complexNumber.a + complexNumber.b) * this.a;        //very strange formulas
         pl.b = (complexNumber.b + complexNumber.b) * this.b;
         return pl;
     }

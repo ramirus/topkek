@@ -1,4 +1,4 @@
-package DvumernieMassive;
+package DvumernieMassive;//-????
 
 import java.util.Random;
 import java.util.Scanner;
