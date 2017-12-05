@@ -8,6 +8,5 @@ public class RationalVector2D {
         double y=0;
     }
     public RationalVector2D(RationalVector2D rationalVector2D){
-        this.x
     }
 }

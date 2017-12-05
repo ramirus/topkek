@@ -80,7 +80,7 @@ public class ComplexNumber {
         double l = Math.sqrt(this.a * this.a + this.b * this.b);
         double ar = Math.atan(l);
         powe = Math.pow(l, m) * (Math.cos(m * ar) + Math.sin(m * ar));
-        return powe(m);
+        return powe(powe);
     }
 
     public static void main(String[] args) {
