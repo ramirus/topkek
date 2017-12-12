@@ -1,4 +1,4 @@
-package Stroki;
+package Stroki;//-
 
 import java.util.Scanner;
 
