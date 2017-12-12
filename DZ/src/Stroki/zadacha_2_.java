@@ -1,4 +1,4 @@
-package Stroki;
+package Stroki;//-
 
 import java.util.Scanner;
 import java.lang.String;
@@ -19,6 +19,6 @@ public class zadacha_2_ {
                 min = a[i];
             }
         }
-        System.out.println("минимум=" + min);
+        System.out.println("минимум=" + min);     //did not understand anything
     }
 }
