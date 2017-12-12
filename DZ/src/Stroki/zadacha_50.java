@@ -1,4 +1,4 @@
-package Stroki;
+package Stroki;//-
 
 import java.util.Scanner;
 import java.lang.String;
@@ -11,7 +11,7 @@ public class zadacha_50 {
         s1=sc.nextLine();
         s2=sc.nextLine();
         boolean f=false;
-        if(s1.length()==s2.length() && s1.equals(s2)){
+        if(s1.length()==s2.length() && s1.equals(s2)){  // only length(), charAt() and + !
             f=true;
             System.out.println(f);
         }
