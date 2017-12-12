@@ -1,10 +1,10 @@
-package OOP.zadacha_12_;
+package OOP.zadacha_12_;//-
 // задача 12 ,   пассажир-перевозчик
 
 import java.lang.String;
 import java.util.Scanner;
 
-public class Transport {
+public class Transport {   //very strange configuration
     private int time;
     private int price;
 
