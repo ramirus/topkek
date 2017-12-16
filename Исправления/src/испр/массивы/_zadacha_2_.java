@@ -1,4 +1,4 @@
-package massiv;//-
+package испр.массивы;//-
 
 import java.util.Random;
 import java.util.Scanner;
@@ -16,27 +16,25 @@ public class _zadacha_2_ {
         }
         c = a[0];
         m = a[0];
-        for (int i = 0; i <= n - 1; i++) {
+        for ( int i = 0; i < n; i++ ) {
             if (a[i] < c) {
                 c = a[i];
-                i = g;
+                g = i;
             }
-        }
-        for (int i = 0; i <= n - 1; i++) {
             if (a[i] > m) {
                 m = a[i];
-                i = l;
+                l = i;
             }
         }
-        if (l > g) {
-            for (int i = g; i <= l; i++) {
+        if (g <l) {
+            for (int i = l+1; i < l; i++) {
                 S += a[i];
             }
         } else {
-            for (int i = l; i >= g; i--) {  //знак наоборот
+            for (int i = g+1; i < g; i++) {
                 S += a[i];
             }
-            System.out.println(S); // предполагалось, что сами границы не входят
+            System.out.println(S);
         }
     }
 }
