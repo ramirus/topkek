@@ -1,4 +1,4 @@
-package avtomat;
+package avtomat;//-
 
 import java.lang.String;
 public class zadacha_1_ {
