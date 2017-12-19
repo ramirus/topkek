@@ -1,4 +1,4 @@
-package испр.массивы;
+package испр.массивы;//-
 import java.util.Scanner;
 import java.util.Random;
 public class _8_2_ {
