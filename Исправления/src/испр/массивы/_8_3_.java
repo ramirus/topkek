@@ -1,4 +1,4 @@
-package испр.массивы;
+package испр.массивы;//-
 
 import java.util.Random;
 import java.util.Scanner;
