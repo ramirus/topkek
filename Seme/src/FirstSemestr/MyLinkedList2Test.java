@@ -17,17 +17,12 @@ public class MyLinkedList2Test {
 
     @Test
     public void firstValue() {//insert
-        int[] arr = {43, 21, 13, 45};
-        test=new MyLinkedList2(arr);
-        test.insert(12);
-
-
     }
 
     @Test
     public void findDeleted() {//delete
         int[] arr = {43, 21, 13, 45};
-        test=new MyLinkedList2(arr);
+        test = new MyLinkedList2(arr);
         test.delete(43);
         assertFalse(test.indexOf(43) != 0);
     }
@@ -35,7 +30,7 @@ public class MyLinkedList2Test {
     @Test
     public void testMax() {
         int[] arra = {43, 21, 13, 45};
-        test=new MyLinkedList2(arra);
+        test = new MyLinkedList2(arra);
         int n = test.size();
         int[] arr = new int[n];
         for (int i = 0; i < arr.length; i++) {

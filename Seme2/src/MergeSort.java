@@ -3,60 +3,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MergeSort {
-
-    /*
-        public static int[] mergeSort(int[] arr) {
-            if (arr.length <= 1) return arr;
-            int mid = arr.length / 2;
-            int[] leftSize = new int[mid];
-            int[] rightSize = new int[mid + arr.length % 2];
-            int j = 0;
-            for (int i = 0; i < arr.length; i++) {
-                if (i < arr.length / 2) {
-                    leftSize[i] = arr[i];
-                } else {
-                    rightSize[j] = arr[i];
-                    j++;
-                }
-            }
-            return merge(mergeSort(leftSize), mergeSort(rightSize));
-        }
-
-        //переделать чуток , книга Сэджвик
-        /*public static int[] merge(int[] left, int[] right) {
-            int k = 0;
-            int a = 0, b = 0;
-            int[] merged = new int[left.length + right.length];
-            for (int i = 0; i < left.length + right.length; i++) {
-                k++;
-                if (b < right.length && a < left.length) {
-                    if (left[a] > right[b] && b < right.length) {
-                        merged[i] = right[b];
-                        b++;
-                    } else {
-                        merged[i] = left[a];
-                        a++;
-                    }
-                } else if (b < right.length) {
-                    merged[i] = right[b];
-                    b++;
-                } else {
-                    merged[i] = left[a];
-                    a++;
-                }
-            }
-            System.out.println(k);
-            return merged;
-        }
-    private static int[] a;
-*/
-
+    private static int k = 0;
     public static void mergeSort(int[] a) {
         int[] a2 = new int[a.length];
         mergeSort(a, a2, 0, a.length - 1);
 
     }
-
     private static void mergeSort(int[] a, int[] a2, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -65,9 +17,6 @@ public class MergeSort {
             merge(a, a2, left, mid + 1, right);
         }
     }
-
-    private static int k = 0;
-
     private static void merge(int[] a, int[] a2, int leftPos, int rightPos, int rightEnd) {
         int leftEnd = rightPos - 1;
         int tmpPos = leftPos;
