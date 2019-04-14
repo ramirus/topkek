@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="it.model.Driver" table="driver">
+        <id name="id" type="java.lang.Long" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="firstName" column="firstName"/>
+        <property name="lastName" column="lastName"/>
+        <property name="email" column="email"/>
+        <property name="phoneNumber" column="phoneNumber"/>
+        <property name="haveCar" column="haveCar"/>
+        <property name="hashPassword" column="hashPassword"/>
+        <property name="rawPassword" column="rawPassword"/>
+        <one-to-one name="car" class="it.model.Car" cascade="save-update"/>
+        <one-to-one name="orders" class="it.model.Order" cascade="save-update"/>
+    </class>
+</hibernate-mapping>
