@@ -1,13 +1,18 @@
+<#ftl>
 <#import "/spring.ftl" as spring/>
-<html>
+<!DOCTYPE HTML>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="<@spring.url'/styles/style.css'/>"/>
-    <style>
-        #containerforreg {
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="<@spring.url '/static/css/reset.css'/>"/>
+    <link rel="stylesheet" type="text/css" href="<@spring.url '/static/css/animate.css'/>">
+    <link rel="stylesheet" type="text/css" href="<@spring.url '/static/css/styles.css'/>">
+     <style>
+        #regCont {
             position: relative;
             width: 340px;
             height: 580px;
@@ -35,7 +40,6 @@
             animation-iteration-count: 1;
             animation-timing-function: linear;
         }
-
         body {
             font-family: "Source Sans Pro", Arial, sans-serif;
             font-weight: 300;
@@ -43,18 +47,19 @@
             line-height: 1.5;
         }
     </style>
+    <title>Registration</title>
 </head>
 <body>
-<div id="containerforreg">
+<div id="regCont">
     <form method="post">
         <label for="firstname">First name:</label>
         <input type="name" id="firstname" name="firstname" required>
         <label for="lastname">Last name:</label>
         <input type="name" id="lastname" name="lastname" required>
         <label for="email">Email:</label>
-        <input type="name" id="email" name="email" required>
+        <input type="email" id="email" name="email" required>
         <label for="phone">Phone number:</label>
-        <input type="name" id="phone" name="phone" required>
+        <input type="tel" id="phone" name="phone" required>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <label>Do you have a car?</label>

@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 @Lazy
 @Controller
@@ -21,23 +24,26 @@ public class AuthController {
     @Autowired
     @Lazy
     private DriverService driverService;
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String log(Model model) {
-        return "login";
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String getLog(HttpServletResponse response, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+    public String getLog(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
         LoginForm form = LoginForm.builder()
                 .email(email)
                 .password(password)
                 .build();
         String cookieValue = driverService.login(form);
         if (cookieValue != null) {
+            request.getSession().setAttribute("driverEmail", email);
             Cookie auth = new Cookie("auth", cookieValue);
             response.addCookie(auth);
-            return "profile";
+            return "redirect:/profile";
+        }
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String log(HttpServletRequest request, Model model) {
+        if (request.getParameterMap().containsKey("error")) {
+            model.addAttribute("error", "error");
         }
         return "login";
     }
@@ -60,9 +66,9 @@ public class AuthController {
                 .password(password)
                 .build();
         if (driverService.checkReg(regDriverForm.getEmail())) {
-            return "login";
+            return "redirect:/login";
         }
-        model.addAttribute("msg", "azaza, такой email уже юзается");
+        model.addAttribute("msg", "Такой email уже используется.");
         return "reg";
     }
 }

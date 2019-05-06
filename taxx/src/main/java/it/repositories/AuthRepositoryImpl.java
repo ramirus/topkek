@@ -27,15 +27,10 @@ public class AuthRepositoryImpl implements AuthRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private RowMapper<Auth> authRowMapper = new RowMapper<Auth>() {
-        @Override
-        public Auth mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return Auth.builder()
-                    .id(rs.getLong("id"))
-                    .cookieValue(rs.getString("cookie_value"))
-                    .build();
-        }
-    };
+    private RowMapper<Auth> authRowMapper = (rs, rowNum) -> Auth.builder()
+            .id(rs.getLong("id"))
+            .cookieValue(rs.getString("cookie_value"))
+            .build();
     @Override
     public Auth findByCookieValue(String cookieValue) {
         try {

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Lazy
@@ -32,11 +33,11 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public String login(LoginForm loginForm) {
-        Driver driver = driverRepository.findOneByEmail(loginForm.getEmail());
-        if (driver != null && passwordEncoder.matches(loginForm.getPassword(), driver.getHashPassword())) {
+        Optional<Driver> driver =  driverRepository.findOneByEmail(loginForm.getEmail());
+        if (driver.isPresent() && passwordEncoder.matches(loginForm.getPassword(), driver.get().getHashPassword())) {
             String cookieValue = UUID.randomUUID().toString();
             Auth auth = Auth.builder()
-                    .driverId(driver.getId())
+                    .driverId(driver.get().getId())
                     .cookieValue(cookieValue)
                     .build();
             authRepository.save(auth);
@@ -65,10 +66,14 @@ public class DriverServiceImpl implements DriverService {
         }
         return false;
     }
+    @Override
+    public Optional<Driver> findByEmail(String email){
+        return driverRepository.findOneByEmail(email);
+    }
 
     @Override
     public boolean checkReg(String email) {
-        if (driverRepository.findOneByEmail(email) != null) {
+        if (driverRepository.findOneByEmail(email).isPresent()) {
             return true;
         }
         return false;

@@ -1,17 +1,16 @@
 package it.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -21,6 +20,8 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.Properties;
 
+@Configuration
+@EnableWebMvc
 @ComponentScan("it")
 @PropertySource("classpath:it//application.properties")
 public class AppConfig extends WebMvcConfigurerAdapter {
@@ -36,9 +37,13 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views/ftl/");
         return freeMarkerConfigurer;
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/static/css").setCachePeriod(123);
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/").setCachePeriod(100);
+        registry.addResourceHandler("/css/**").addResourceLocations("/static/css/").setCachePeriod(100);
+        registry.addResourceHandler("/img/**").addResourceLocations("/static/img/").setCachePeriod(100);
+        registry.addResourceHandler("/js/**").addResourceLocations("/static/js/").setCachePeriod(100);
     }
 
 

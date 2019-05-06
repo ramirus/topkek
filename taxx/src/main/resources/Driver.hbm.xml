@@ -16,6 +16,11 @@
         <property name="hashPassword" column="hashPassword"/>
         <property name="rawPassword" column="rawPassword"/>
         <one-to-one name="car" class="it.model.Car" cascade="save-update"/>
-        <one-to-one name="orders" class="it.model.Order" cascade="save-update"/>
+        <set name="orders" table="orders" lazy="true" fetch="select">
+            <key>
+                <column name="driverId" not-null="true"/>
+            </key>
+            <one-to-many class="it.model.Order"/>
+        </set>
     </class>
 </hibernate-mapping>

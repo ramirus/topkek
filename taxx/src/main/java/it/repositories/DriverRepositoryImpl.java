@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.Optional;
 
 @Lazy
 @Component
@@ -31,11 +32,12 @@ public class DriverRepositoryImpl implements DriverRepository {
     }
 
     @Override
-    public Driver findOneByEmail(String email) {
+    public Optional<Driver> findOneByEmail(String email) {
         Session session = this.sessionFactory.openSession();
         Query query = session.createQuery("from Driver where email=:email");
         query.setParameter("email", email);
-        return (Driver) query.uniqueResult();
+        Driver driver= (Driver) query.uniqueResult();
+        return Optional.ofNullable(driver);
     }
 
     @Override

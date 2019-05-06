@@ -8,11 +8,14 @@
         <id name="id" type="java.lang.Long" column="id">
             <generator class="identity"/>
         </id>
-        <property name="firstAddress" column="firstName"/>
-        <property name="lastAddress" column="lastName"/>
-        <property name="price" column="email"/>
-        <property name="clientPhone" column="phoneNumber"/>
+        <property name="firstAddress" column="firstAddress"/>
+        <property name="lastAddress" column="lastAddress"/>
+        <property name="price" column="price"/>
+        <property name="clientPhone" column="clientPhone"/>
         <property name="date" column="date"/>
-        <one-to-one name="driver" class="it.model.Driver" cascade="save-update"/>
+        <property name="comment" column="comments"/>
+        <many-to-one name="driver" class="it.model.Driver" cascade="save-update">
+            <column name="driverId" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

@@ -13,6 +13,8 @@
         <property name="hbm2ddl.auto">update</property>
         <mapping resource="Driver.hbm.xml"/>
         <mapping resource="Car.hbm.xml"/>
+        <mapping resource="Order.hbm.xml"/>
+        <mapping resource="RatingComment.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>
