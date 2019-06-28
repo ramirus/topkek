@@ -3,6 +3,7 @@ package it.model;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -13,23 +14,29 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Component
+@Table(name = "driver")
+@Entity
 public class Driver {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
     private Long id;
 
-    private String firstName;
-
-    private String lastName;
+    //    @Column(name = "firstname")
+    private String firstname;
+    //    @Column(name ="lastname")
+    private String lastname;
+    //    @Column(name = "hashpassword")
     private String hashPassword;
-
-    private String rawPassword;
-
+    //    @Column(name = "email")
     private String email;
-
-    private String phoneNumber;
-
+    //    @Column(name = "phonenumber")
+    private String phonenumber;
+    //    @Column(name = "havecar")
     private String haveCar;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "driver", cascade = CascadeType.ALL)
     private Car car;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver", cascade = CascadeType.ALL)
     private List<Order> orders;
 }

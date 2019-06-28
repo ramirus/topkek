@@ -1,9 +1,9 @@
-<#ftl>
+<#ftl encoding="UTF-8">
 <#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,13 +11,13 @@
     <link href="<@spring.url '/static/css/bootstrap.min.css'/>" type="text/css" rel="stylesheet">
     <link href="<@spring.url  '/static/css/bootstrap.css'/> " type="text/css" rel="stylesheet">
     <title>Main titale</title>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ANf_GFwBAAAAgP4VRgIAFleT36TN9sOzvi3WG_w0t0Uva80AAAAAAAAAAAAeT3mfa51EzaActPKc_6Gu-BcYAQ=="
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=0b64ce1c-2962-4ec5-9ef0-80b10a60b27c"
             type="text/javascript"></script>
     <script rel="script" src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
     <style>
         #map {
-            height: 75%;
-            width: 100%;
+            height: 400px;
+            width: 750px;
         }
 
         body {
@@ -28,7 +28,7 @@
         }
 
         #order {
-            width: 50%;
+            width: 750px;
             height: 80%;
             margin-left: 25%;
             background-color: whitesmoke;
@@ -41,22 +41,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li class="active"><a href="">Главная</a></li>
-                <li><a onclick="location.href='/rating'">Отзывы</a></li>
-                <li><a onclick="location.href='/aboutUs'">О нас</a></li>
+                <li><a href="/taxx_war/rating">Отзывы</a></li>
+                <li><a href="/taxx_war/aboutUs">О нас</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <#if loged??>
-                    <li><a onclick="location.href='/profile'">Профиль</a></li>
-                    <li><a onclick="location.href='/logout'">Выход</a></li>
+                    <li><a href="/taxx_war/profile">Профиль</a></li>
+                    <li><a href="/logout">Выход</a></li>
                 </#if>
-                <li><a onclick="location.href='/login'">Вход</a></li>
-                <li><a onclick="location.href='/signUp'">Регистрация водителя</a></li>
+                <li><a href="/taxx_war/login">Вход</a></li>
+                <li><a href="/taxx_war/signUp">Регистрация водителя</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <div>
-    <form method="post" id="order">
+    <form method="post" accept-charset="UTF-8" id="order">
         <div id="map"></div>
         <label>Ваш номер телефона:</label>
         <input type="text" name="phone" placeholder="Телефон" id="phone" required>
@@ -65,12 +65,14 @@
         <textarea name="comment" placeholder="Комментарий" id="comment"></textarea>
         <input id="start" name="start" type="hidden"/>
         <input id="end" name="end" type="hidden"/>
+        <input id="pr" name="price" type="hidden">
         <input type="submit" class="btn-primary" value="Заказать такси" id="sub"/>
     </form>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" rel="script" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" rel="script"
+        type="text/javascript"></script>
 <script src="/static/js/bootstrap.min.js" rel="script" type="text/javascript"></script>
-<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/bootstrap.js" rel="script" type="text/javascript"></script>
 <script>
     ymaps.ready(function () {
         if (navigator.geolocation) {
@@ -86,7 +88,7 @@
                 ymaps.ready(function () {
                     var myMap = new ymaps.Map('map', {
                         center: [latitude, longitude],
-                        zoom: 9,
+                        zoom: 11,
                         controls: ['routePanelControl', 'zoomControl']
                     });
                     var control = myMap.controls.get('routePanelControl');
@@ -115,14 +117,15 @@
                         route.model.events.add('requestsuccess', function () {
                             var activeRoute = route.getActiveRoute();
                             if (activeRoute) {
-                                document.getElementById('start').value=document.getElementsByClassName('ymaps-2-1-72-route-panel-input__input')[0].value;
-                                document.getElementById('end').value=document.getElementsByClassName('ymaps-2-1-72-route-panel-input__input')[1].value;
-                                console.log(document.getElementById('start').value+" "+document.getElementById('end').value);
+                                document.getElementById('start').value = document.getElementsByClassName('ymaps-2-1-73-route-panel-input__input')[0].value;
+                                document.getElementById('end').value = document.getElementsByClassName('ymaps-2-1-73-route-panel-input__input')[1].value;
+                                console.log(document.getElementById('start').value + " " + document.getElementById('end').value);
                                 var length = route.getActiveRoute().properties.get("distance"),
                                     price = calculate(Math.round(length.value / 1000)),
                                     balloonContentLayout = ymaps.templateLayoutFactory.createClass(
                                         '<span>Расстояние: ' + length.text + '.</span><br/>' +
-                                        '<span style="font-weight: bold; font-style: italic" id="pricer">Стоимость доставки: ' + price + ' р.</span>');
+                                        '<span style="font-weight: bold; font-style: italic" id="pricer">Стоимость поездки: ' + price + ' р.</span>');
+                                document.getElementById("pr").value = price;
                                 route.options.set('routeBalloonContentLayout', balloonContentLayout);
                                 activeRoute.balloon.open();
                             }
@@ -130,8 +133,7 @@
                     });
                 });
             });
-        }
-        else {
+        } else {
             alert("Geolocation API не поддерживается в вашем браузере");
         }
     });
@@ -143,28 +145,9 @@
             startPoint = document.getElementById('start').value,
             endPoint = document.getElementById('end').value;
         if (phone !== null && comment !== null && (startPoint !== null || startPoint !== undefined) && (endPoint !== null || endPoint !== undefined) && price !== null) {
-            sender(startPoint, endPoint, price, phone, comment);
+            alert("Машина уже в пути" + "Цена:" + price);
         }
     };
-
-    function sender(start, end, price, phone, comment) {
-        $.ajax({
-            type: 'post',
-            url: '/main',
-            data: {
-                start: start,
-                end: end,
-                price: price,
-                phone: phone,
-                comment: comment
-            }
-        }).done(function (data) {
-            console.log(data);
-            alert("Ваше такси уже выехало");
-        }).fail(function () {
-            alert("Что-то пошло не так");
-        });
-    }
 </script>
 </body>
 </html>

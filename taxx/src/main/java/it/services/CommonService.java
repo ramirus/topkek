@@ -7,5 +7,5 @@ import java.util.List;
 public interface CommonService {
     void newRatingComment(RatingComment ratingComment);
 
-    List<RatingComment> getAllRatingCom();
+    List getAllRatingCom();
 }

@@ -9,11 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Lazy
-@Service(value = "detailsService")
+@Service(value = "userDetailsServiceImpl")
+@EnableTransactionManagement
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -21,6 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Qualifier(value = "driverRepositoryImpl")
     private DriverRepository driverRepository;
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Optional<Driver> optionalDriver = driverRepository.findOneByEmail(s);

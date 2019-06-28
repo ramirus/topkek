@@ -1,14 +1,22 @@
 package it.config;
 
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -16,13 +24,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.Properties;
 
+@Lazy
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan("it")
+@EnableAspectJAutoProxy
+@Aspect
 @PropertySource("classpath:it//application.properties")
 public class AppConfig extends WebMvcConfigurerAdapter {
 
@@ -56,9 +71,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         viewResolver.setCache(true);
         viewResolver.setPrefix("");
         viewResolver.setSuffix(".ftl");
-        viewResolver.setContentType("text/html; charset=UTF-8");
+        viewResolver.setContentType("text/html;charset=UTF-8");
         return viewResolver;
     }
+
 
     @Lazy
     @Bean
@@ -70,6 +86,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         dataSource.setDriverClassName(environment.getProperty("db.driverClassName"));
         return dataSource;
     }
+
     @Lazy
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
@@ -91,7 +108,17 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     }
 
     @Lazy
-    @Bean
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory emf, DataSource ds) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+
+        return transactionManager;
+    }
+
+    @Lazy
+    @PersistenceContext(unitName = "entityManagerFactory")
+    @Bean("entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();

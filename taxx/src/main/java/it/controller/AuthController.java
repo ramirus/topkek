@@ -3,6 +3,7 @@ package it.controller;
 import it.form.LoginForm;
 import it.form.RegDriverForm;
 import it.services.DriverService;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -11,26 +12,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-@Lazy
+
 @Controller
 public class AuthController {
+    @Lazy
+    @Autowired
+    LoginForm loginForm;
+    @Autowired
+    @Lazy
+    RegDriverForm regDriverForm;
 
     @Autowired
     @Lazy
     private DriverService driverService;
+
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String getLog(HttpServletRequest request, HttpServletResponse response, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
-        LoginForm form = LoginForm.builder()
+        loginForm = LoginForm.builder()
                 .email(email)
                 .password(password)
                 .build();
-        String cookieValue = driverService.login(form);
+        System.out.println(email + " " + password);
+        String cookieValue = driverService.login(loginForm);
         if (cookieValue != null) {
             request.getSession().setAttribute("driverEmail", email);
             Cookie auth = new Cookie("auth", cookieValue);
@@ -57,7 +68,7 @@ public class AuthController {
     public String getRegForm(Model model, @RequestParam(name = "firstname") String firstName, @RequestParam(name = "lastname") String lastName,
                              @RequestParam(name = "email") String email, @RequestParam(name = "phone") String phone, @RequestParam(name = "password") String password,
                              @RequestParam(name = "haveCar") String haveCar) {
-        RegDriverForm regDriverForm = RegDriverForm.builder()
+        regDriverForm = RegDriverForm.builder()
                 .email(email)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -65,10 +76,11 @@ public class AuthController {
                 .phoneNumber(phone)
                 .password(password)
                 .build();
-        if (driverService.checkReg(regDriverForm.getEmail())) {
-            return "redirect:/login";
-        }
-        model.addAttribute("msg", "Такой email уже используется.");
-        return "reg";
+//        if (driverService.checkReg(regDriverForm.getEmail())) {
+//            model.addAttribute("msg", "Такой email уже используется.");
+//            return "reg";
+//        }
+        driverService.register(regDriverForm);
+        return "redirect:/login";
     }
 }

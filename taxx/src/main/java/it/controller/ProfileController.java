@@ -21,10 +21,10 @@ public class ProfileController {
     DriverService driverService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String loadPage(Model model, Authentication authentication) {
-        UserDetailsImpl userDetails= (UserDetailsImpl) authentication.getPrincipal();
-        Driver driver=userDetails.getDriver();
-        int sum = driverService.getSumForOrderForDay(driver.getId());
+    public String loadPage(Model model, Authentication authentication, HttpServletRequest request) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        Driver driver = userDetails.getDriver();
+        int sum = 120;
         model.addAttribute("sum", sum);
         model.addAttribute("driver", driver);
         return "profile";

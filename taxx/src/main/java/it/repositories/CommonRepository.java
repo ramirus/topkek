@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface CommonRepository {
     void newRC(RatingComment ratingComment);
-    List<RatingComment> getAllRC();
+
+    List getAllRC();
 }

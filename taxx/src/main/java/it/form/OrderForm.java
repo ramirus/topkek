@@ -17,7 +17,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Component
 @Lazy
-
 public class OrderForm {
     private Long id;
     private String firstAddress;

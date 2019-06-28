@@ -1,5 +1,6 @@
 package it.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import it.model.RatingComment;
 import it.security.UserDetailsImpl;
 import it.services.CommonService;
@@ -23,6 +24,7 @@ public class RatingPageController {
     @Lazy
     CommonService commonService;
 
+
     @RequestMapping(value = "/rating", method = RequestMethod.GET)
     public String loadRPage(HttpServletRequest request, Model model) {
 //        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -35,6 +37,9 @@ public class RatingPageController {
         List<RatingComment> rc = commonService.getAllRatingCom();
         if (rc != null) {
             model.addAttribute("comments", rc);
+            for (RatingComment r : rc) {
+                System.out.println(r.getRatingcount());
+            }
         }
         return "rating";
     }
@@ -43,11 +48,11 @@ public class RatingPageController {
     public String addNewRC(Model model, @RequestParam("phone") String clientPhone, @RequestParam("comment") String comment,
                            @RequestParam("ratingCount") Integer ratingCount) {
         RatingComment rc = RatingComment.builder()
-                .clientPhone(clientPhone)
+                .clientphone(clientPhone)
                 .comment(comment)
-                .ratingCount(ratingCount)
+                .ratingcount(ratingCount)
                 .build();
         commonService.newRatingComment(rc);
-        return "rating";
+        return "redirect:/rating";
     }
 }

@@ -17,11 +17,11 @@ public class AuthRepositoryImpl implements AuthRepository {
     private JdbcTemplate jdbcTemplate;
     //language=SQL
     private static final String SQL_INSERT =
-            "insert into auth(driver_id, cookie_value) values (?, ?)";
+            "insert into auth(driverid, cookievalue) values (?, ?)";
 
     //language=SQL
     private static final String SQL_SELECT_BY_COOKIE_VALUE =
-            "select * from auth where cookie_value = ?";
+            "select * from auth where cookievalue = ?";
 
     public AuthRepositoryImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -29,8 +29,9 @@ public class AuthRepositoryImpl implements AuthRepository {
 
     private RowMapper<Auth> authRowMapper = (rs, rowNum) -> Auth.builder()
             .id(rs.getLong("id"))
-            .cookieValue(rs.getString("cookie_value"))
+            .cookieValue(rs.getString("cookievalue"))
             .build();
+
     @Override
     public Auth findByCookieValue(String cookieValue) {
         try {

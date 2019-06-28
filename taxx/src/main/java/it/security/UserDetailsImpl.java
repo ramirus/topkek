@@ -9,9 +9,10 @@ import java.util.Collection;
 public class UserDetailsImpl implements UserDetails {
     private Driver driver;
 
-    public UserDetailsImpl(Driver driver){
-        this.driver=driver;
+    public UserDetailsImpl(Driver driver) {
+        this.driver = driver;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -46,7 +47,8 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    public Driver getDriver(){
+
+    public Driver getDriver() {
         return driver;
     }
 }

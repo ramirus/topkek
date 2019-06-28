@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@Component
 public class Auth {
     private Long id;
     private String cookieValue;

@@ -1,4 +1,4 @@
-<#ftl>
+<#ftl encoding="UTF-8">
 <#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
 <html lang="ru">
@@ -52,23 +52,22 @@
         }
     </style>
 </head>
-<body background="https://www.tomswallpapers.com/pic/201503/1366x768/tomswallpapers.com-18974.jpg"
-      onload="getAllRatC()">
+<body background="https://www.tomswallpapers.com/pic/201503/1366x768/tomswallpapers.com-18974.jpg">
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
-                <li><a onclick="location.href='/main'">Главная</a></li>
-                <li class="active"><a onclick="location.href='/rating'">Отзывы</a></li>
-                <li><a onclick="location.href='/aboutUs'">О нас</a></li>
+                <li><a href="">Главная</a></li>
+                <li class="active"><a href="/taxx_war/rating">Отзывы</a></li>
+                <li><a href="/taxx_war/aboutUs">О нас</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <#if loged??>
-                    <li><a onclick="location.href='/profile'">Профиль</a></li>
-                    <li><a onclick="location.href='/logout'">Выход</a></li>
+                    <li><a href="/taxx_war/profile">Профиль</a></li>
+                    <li><a href="/logout">Выход</a></li>
                 </#if>
-                <li><a onclick="location.href='/login'">Вход</a></li>
-                <li><a onclick="location.href='/signUp'">Регистрация водителя</a></li>
+                <li><a href="/taxx_war/login">Вход</a></li>
+                <li><a href="/taxx_war/signUp">Регистрация водителя</a></li>
             </ul>
         </div>
     </div>
@@ -101,11 +100,11 @@
     </form>
 </div>
 <div class="cont">
-    <#if comments?has_content>
+    <#if comments??>
         <#list comments as comment>
-            <p><span>"${comment.@clientPhone}"</span></p>
-            <p>"${comment.@comment}"</p>
-            <p>"${comment.@ratingCount}"</p>
+            <p><span>Номер телефона:${comment.clientphone}</span></p>
+            <p>Комментарий:${comment.comment}</p>
+            <p>Оценка:${comment.ratingcount}</p>
         </#list>
     </#if>
 </div>

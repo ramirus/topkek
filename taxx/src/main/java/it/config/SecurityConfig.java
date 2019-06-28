@@ -1,5 +1,6 @@
 package it.config;
 
+import it.filter.EncodingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,11 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Lazy
-    @Qualifier(value = "detailsService")
+    @Qualifier(value = "userDetailsServiceImpl")
     private UserDetailsService detailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(new EncodingFilter(), ChannelProcessingFilter.class);
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/signUp").permitAll()

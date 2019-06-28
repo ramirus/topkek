@@ -5,40 +5,42 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
 
 @Lazy
-@Component
+@Component(value = "commonRepositoryImpl")
 public class CommonRepositoryImpl implements CommonRepository {
-    @Autowired
-    @Lazy
-    SessionFactory sessionFactory;
+
 
     @Autowired
     @Lazy
+    @Qualifier(value = "entityManagerFactory")
+    @PersistenceContext(unitName = "entityManagerFactory")
     EntityManager em;
 
     @Autowired
     @Lazy
-    public CommonRepositoryImpl(@Qualifier(value = "entityManagerFactory") EntityManagerFactory emf) {
-        em = emf.createEntityManager();
+    public CommonRepositoryImpl(@Qualifier(value = "transactionManager") JpaTransactionManager transactionManager) {
+        em = transactionManager.getEntityManagerFactory().createEntityManager();
     }
 
+    @Transactional
     @Override
     public void newRC(RatingComment ratingComment) {
-        em.getTransaction().begin();
         em.persist(ratingComment);
-        em.getTransaction().commit();
     }
 
+    @Transactional
     @Override
     public List<RatingComment> getAllRC() {
-        List commentList = sessionFactory.openSession()
-                .createQuery("from RatingComment").list();
-        return commentList;
+        return em.createQuery("from RatingComment", RatingComment.class).getResultList();
     }
 }

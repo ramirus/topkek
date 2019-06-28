@@ -157,7 +157,8 @@ kind of variable. This temp value is only used in this macro lib -->
  -->
 <#macro formInput path attributes="" fieldType="text">
     <@bind path/>
-    <input type="${fieldType}" id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" value="<#if fieldType!="password">${stringStatusValue}</#if>" ${attributes?no_esc}<@closeTag/>
+    <input type="${fieldType}" id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}"
+           value="<#if fieldType!="password">${stringStatusValue}</#if>" ${attributes?no_esc}<@closeTag/>
 </#macro>
 
 <#--
@@ -245,7 +246,8 @@ ${stringStatusValue}</textarea>
 -->
 <#macro formMultiSelect path options attributes="">
     <@bind path/>
-    <select multiple="multiple" id="${status.expression?replace('[','')?replace(']','')}" name="${status.expression}" ${attributes?no_esc}>
+    <select multiple="multiple" id="${status.expression?replace('[','')?replace(']','')}"
+            name="${status.expression}" ${attributes?no_esc}>
         <#list options?keys as value>
             <#assign isSelected = contains(status.actualValue?default([""]), value)>
             <option value="${value}"<#if isSelected> selected="selected"</#if>>${options[value]}</option>
@@ -269,7 +271,8 @@ ${stringStatusValue}</textarea>
     <@bind path/>
     <#list options?keys as value>
         <#assign id="${status.expression?replace('[','')?replace(']','')}${value_index}">
-        <input type="radio" id="${id}" name="${status.expression}" value="${value}"<#if stringStatusValue == value> checked="checked"</#if> ${attributes?no_esc}<@closeTag/>
+        <input type="radio" id="${id}"
+               name="${status.expression}" value="${value}"<#if stringStatusValue == value> checked="checked"</#if> ${attributes?no_esc}<@closeTag/>
         <label for="${id}">${options[value]}</label>${separator?no_esc}
     </#list>
 </#macro>
@@ -291,7 +294,8 @@ ${stringStatusValue}</textarea>
     <#list options?keys as value>
         <#assign id="${status.expression?replace('[','')?replace(']','')}${value_index}">
         <#assign isSelected = contains(status.actualValue?default([""]), value)>
-        <input type="checkbox" id="${id}" name="${status.expression}" value="${value}"<#if isSelected> checked="checked"</#if> ${attributes?no_esc}<@closeTag/>
+        <input type="checkbox" id="${id}"
+               name="${status.expression}" value="${value}"<#if isSelected> checked="checked"</#if> ${attributes?no_esc}<@closeTag/>
         <label for="${id}">${options[value]}</label>${separator?no_esc}
     </#list>
     <input type="hidden" name="_${status.expression}" value="on"/>
@@ -311,7 +315,8 @@ ${stringStatusValue}</textarea>
     <#assign id="${status.expression?replace('[','')?replace(']','')}">
     <#assign isSelected = status.value?? && status.value?string=="true">
     <input type="hidden" name="_${status.expression}" value="on"/>
-    <input type="checkbox" id="${id}" name="${status.expression}"<#if isSelected> checked="checked"</#if> ${attributes?no_esc}/>
+    <input type="checkbox" id="${id}"
+           name="${status.expression}"<#if isSelected> checked="checked"</#if> ${attributes?no_esc}/>
 </#macro>
 
 <#--

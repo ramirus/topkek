@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Optional;
@@ -18,6 +20,7 @@ import java.util.UUID;
 
 @Lazy
 @Component
+@EnableTransactionManagement
 public class DriverServiceImpl implements DriverService {
 
     @Autowired
@@ -31,9 +34,10 @@ public class DriverServiceImpl implements DriverService {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
+    @Transactional
     @Override
     public String login(LoginForm loginForm) {
-        Optional<Driver> driver =  driverRepository.findOneByEmail(loginForm.getEmail());
+        Optional<Driver> driver = driverRepository.findOneByEmail(loginForm.getEmail());
         if (driver.isPresent() && passwordEncoder.matches(loginForm.getPassword(), driver.get().getHashPassword())) {
             String cookieValue = UUID.randomUUID().toString();
             Auth auth = Auth.builder()
@@ -46,37 +50,36 @@ public class DriverServiceImpl implements DriverService {
         return null;
     }
 
+    @Transactional
     @Override
     public void register(RegDriverForm regDriverForm) {
         Driver driver = Driver.builder()
-                .firstName(regDriverForm.getFirstName())
-                .lastName(regDriverForm.getLastName())
+                .firstname(regDriverForm.getFirstName())
+                .lastname(regDriverForm.getLastName())
                 .email(regDriverForm.getEmail())
-                .phoneNumber(regDriverForm.getPhoneNumber())
+                .phonenumber(regDriverForm.getPhoneNumber())
                 .hashPassword(passwordEncoder.encode(regDriverForm.getPassword()))
                 .haveCar(regDriverForm.getHaveCar())
                 .build();
         driverRepository.save(driver);
     }
 
+    @Transactional
     @Override
     public boolean isExistByCookie(String cookieValue) {
-        if (authRepository.findByCookieValue(cookieValue) != null) {
-            return true;
-        }
-        return false;
+        return authRepository.findByCookieValue(cookieValue) != null;
     }
+
+    @Transactional
     @Override
-    public Optional<Driver> findByEmail(String email){
+    public Optional<Driver> findByEmail(String email) {
         return driverRepository.findOneByEmail(email);
     }
 
+    @Transactional
     @Override
     public boolean checkReg(String email) {
-        if (driverRepository.findOneByEmail(email).isPresent()) {
-            return true;
-        }
-        return false;
+        return driverRepository.findOneByEmail(email).isPresent();
     }
 
     @Override
