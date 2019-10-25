@@ -1,0 +1,49 @@
+version: '3'
+services:
+        
+    postgres:
+        image: olejiksin/postgres
+        build:
+            context: ./postgresql
+            dockerfile: Dockerfile
+        volumes:
+          - ./data:/var/lib/postgresql/data 
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          PGDATA: 
+             ./data
+        ports:
+          - 5432
+    
+       
+    back:
+       build: 
+            context: ./back
+            dockerfile: Dockerfile
+       image: olejiksin/backe
+       working_dir: /back
+       volumes:
+         - ./back:/back
+       ports: 
+            - 8080:8080
+       depends_on:
+            - postgres
+       command: mvn clean spring-boot:run
+       
+       
+   
+    front:
+        build: 
+            context: ./front
+            dockerfile: Dockerfile
+        image: olejiksin/frontend
+        volumes:
+          - ./front:/usr/src/app
+        ports:
+            - 3000:3000
+        command: npm start
+        depends_on: 
+            - back
+    
