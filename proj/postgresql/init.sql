@@ -1,9 +1,0 @@
-
-
-CREATE TABLE IF NOT EXISTS greets
-(
-	id BIGINT NOT NULL
-		CONSTRAINT greets_pkey
-			PRIMARY KEY,
-	content VARCHAR(255)
-);
