@@ -22,4 +22,6 @@ public class TokenServImpl implements TokenServ {
     public Optional<Token> findFirstByUsver(String email){
         return tokenRep.findFirstByUsverId(usverServ.findIdByEmail(email)) ;
     }
+
+
 }

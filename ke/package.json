@@ -9,6 +9,7 @@
     "react-native-axios": "^0.17.1",
     "react-scripts": "3.0.1",
     "save": "^2.4.0",
+    "selenium-webdriver": "^4.0.0-alpha.5",
     "update17": "^0.1.1"
   },
   "scripts": {

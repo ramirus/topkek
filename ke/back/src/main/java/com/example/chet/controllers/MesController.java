@@ -1,26 +1,12 @@
 package com.example.chet.controllers;
 
 import com.example.chet.dto.MessageDto;
-import com.example.chet.model.Role;
-import com.example.chet.model.Token;
-import com.example.chet.model.Usver;
-import com.example.chet.rep.TokenRep;
-import com.example.chet.security.UserDetailsImpl;
 import com.example.chet.serv.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,20 +1,21 @@
-package com.example.chet.rep;
+package ru.itis.chats.rep;
 
-import com.example.chet.model.Token;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import ru.itis.chats.forms.Token;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
+@Lazy
 public interface TokenRep extends CrudRepository<Token, Long> {
-    Optional<Token> findFirstByValue(String value);
+    Optional<Token> findFirstByToken(String value);
 
-    void deleteTokensByExpiredDateTimeBefore(LocalDateTime time);
 
-    Optional<Token> findFirstByUsverId(Long id);
-
+    @Query(value = "select * from  token order by id desc  limit 1", nativeQuery = true)
+    Optional<Token> findLastToken();
 
 }

@@ -16,8 +16,6 @@ import java.util.Optional;
 public interface UsverRep extends CrudRepository<Usver, Long> {
     Optional<Usver> findByEmail(String email);
 
-    @Query(value = "insert into messages values (:usver_Id, :message, :time)", nativeQuery = true)
-    void putMessage(@Param("usver_Id") Long usver_Id, @Param("message") String message, @Param("time") LocalDateTime time);
 
     Optional<Usver> findFirstByEmail(String email);
 }

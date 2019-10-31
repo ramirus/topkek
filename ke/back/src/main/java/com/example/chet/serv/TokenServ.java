@@ -8,4 +8,5 @@ public interface TokenServ {
     boolean isNotExpired(String token);
 
     Optional<Token> findFirstByUsver(String email);
+
 }
