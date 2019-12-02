@@ -1,0 +1,104 @@
+version: '3'
+services:
+        
+    postgres:
+        image: olejiksin/postgres
+        restart: on-failure
+        build:
+            context: ./postgresql
+            dockerfile: Dockerfile
+        volumes:
+          - ./data:/var/lib/postgresql/data 
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          PGDATA: 
+             ./data
+        ports:
+          - 5432
+    
+       
+    cat:
+       build: 
+            context: ./CatsService
+            dockerfile: Dockerfile
+       image: olejiksin/cat
+       restart: on-failure
+       working_dir: /CatsService
+       volumes:
+         - ./CatsService:/CatsService
+       ports: 
+            - 8090:8090
+       depends_on:
+            - postgres
+            - zuul
+            - EurekaService
+       command: mvn clean spring-boot:run
+       
+       
+    about:
+       build: 
+            context: ./UsersInfoService
+            dockerfile: Dockerfile
+       image: olejiksin/users
+       working_dir: /UsersInfoService
+       restart: on-failure
+       volumes:
+         - ./UsersInfoService:/UsersInfoService
+       ports: 
+            - 8040:8040
+       depends_on:
+            - postgres
+            - zuul
+            - EurekaService
+       command: mvn clean spring-boot:run   
+       
+   
+    country:
+        build: 
+            context: ./CountriesService
+            dockerfile: Dockerfile
+        image: olejiksin/country
+        restart: on-failure
+        volumes:
+          - ./CountriesService:/CountriesService
+        ports:
+            - 8030:8030
+        command: mvn clean spring-boot:run
+        depends_on: 
+            - postgres
+            - zuul
+            - EurekaService
+            
+    
+    EurekaService:
+        build: 
+            context: ./ServiceRegistry
+            dockerfile: Dockerfile
+        image: olejiksin/service
+        restart: on-failure
+        volumes:
+          - ./ServiceRegistry:/ServiceRegistry
+        ports:
+            - 8761:8761
+        command: mvn clean spring-boot:run
+        depends_on: 
+            - postgres
+            
+    zuul:
+        build: 
+            context: ./ZuulService
+            dockerfile: Dockerfile
+        image: olejiksin/zuul
+        restart: on-failure
+        volumes:
+          - ./ZuulService:/ZuulService
+        ports:
+            - 8080:8080
+        command: mvn clean spring-boot:run
+        depends_on: 
+            - postgres
+            - EurekaService
+
+    
