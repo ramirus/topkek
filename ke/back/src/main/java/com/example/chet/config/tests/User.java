@@ -1,4 +1,4 @@
-package com.example.chet.config.t3;
+package com.example.chet.config.tests;
 
 
 import lombok.*;

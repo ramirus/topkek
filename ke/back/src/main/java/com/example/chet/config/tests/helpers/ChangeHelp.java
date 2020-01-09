@@ -1,6 +1,6 @@
-package com.example.chet.config.t3.helpers;
+package com.example.chet.config.tests.helpers;
 
-import com.example.chet.config.t3.AppMan;
+import com.example.chet.config.tests.AppMan;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;

@@ -1,20 +1,23 @@
-package com.example.chet.config.t3.helpers;
+package com.example.chet.config.tests.helpers;
 
-import com.example.chet.config.t3.AppMan;
-import com.example.chet.config.t3.User;
+
+import com.example.chet.config.tests.AppMan;
+import com.example.chet.config.tests.User;
 import org.openqa.selenium.By;
 
 public class AuthHelp extends BasHelp {
+
+    private boolean isLogged;
     public AuthHelp(AppMan appMan) {
         super(appMan);
     }
 
-    public void EnterLoginAndPassword() {
+    public void EnterLoginAndPassword(String login, String pass) {
         User user = new User("olejiksin", "QaZWsXEdC99");
         driver.findElement(By.id("log_in")).click();
-        driver.findElement(By.id("nw_username")).sendKeys(user.getLogin());
+        driver.findElement(By.id("nw_username")).sendKeys(login);
         driver.findElement(By.id("nw_password")).click();
-        driver.findElement(By.id("nw_password")).sendKeys(user.getPassword());
+        driver.findElement(By.id("nw_password")).sendKeys(pass);
 //        SubmitData();
     }
 

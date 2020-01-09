@@ -1,1 +1,1 @@
-<ArrayList><item><login>RP1I}E)E)SnJHK0</login><password>OL2WyG>5>CLegl$</password></item><item><login>E_>1o9Y&amp;+d/Z#fl</login><password>Mehq~sF>k>rsFKB</password></item><item><login>XIMuh}^9XPY4s]#</login><password>+XU8z!/)B6A&lt;&amp;s6</password></item></ArrayList>
+{"unCorLog":"cg?)IC@ZBP","unCorPass":"I9z6+H6bs#","corPass":"QaZWsXEdC99","corLog":"olejiksin","url":"https://hub.docker.com"}

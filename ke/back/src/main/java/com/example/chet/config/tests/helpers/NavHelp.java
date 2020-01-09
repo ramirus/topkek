@@ -1,6 +1,6 @@
-package com.example.chet.config.t3.helpers;
+package com.example.chet.config.tests.helpers;
 
-import com.example.chet.config.t3.AppMan;
+import com.example.chet.config.tests.AppMan;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +15,8 @@ public class NavHelp extends BasHelp {
 
 
     public void OpenMainPage() {
-        driver.get("https://hub.docker.com");
+//        driver.get("https://hub.docker.com");
+        driver.get(appMan.getSetting().getUrl());
     }
     public void OpenRepPage() {
         WebDriverWait webDriverWait=new WebDriverWait(driver,5);
