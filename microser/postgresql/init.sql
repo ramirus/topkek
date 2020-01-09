@@ -1,37 +1,20 @@
 
 
-create table online_users
+create table if not exists stomp_mes
 (
-    id     bigserial not null
-        constraint online_users_pk
-            primary key,
-    name   varchar(100),
-    online varchar(10)
+	id bigserial not null
+		constraint stomp_mes_pk
+			primary key,
+	usver varchar(255),
+	message varchar(500),
+	room integer,
+	type varchar(255)
 );
 
-alter table online_users
-    owner to postgres;
+alter table stomp_mes owner to postgres;
 
-create unique index online_users_id_uindex
-    on online_users (id);
+create unique index if not exists stomp_mes_id_uindex
+	on stomp_mes (id);
 
-create unique index online_users_name_uindex
-    on online_users (name);
 
-create table test
-(
-    id      bigserial not null
-        constraint test_pk
-            primary key,
-    message varchar(1000),
-    user_id bigint
-        constraint test_online_users__fk
-            references online_users
-);
-
-alter table test
-    owner to postgres;
-
-create unique index test_id_uindex
-    on test (id);
 

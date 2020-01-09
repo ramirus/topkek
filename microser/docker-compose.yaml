@@ -18,59 +18,39 @@ services:
         ports:
           - 5432
     
-       
-    cat:
-       build: 
-            context: ./CatsService
-            dockerfile: Dockerfile
-       image: olejiksin/cat
-       restart: on-failure
-       working_dir: /CatsService
-       volumes:
-         - ./CatsService:/CatsService
-       ports: 
-            - 8090:8090
-       depends_on:
-            - postgres
-            - zuul
-            - EurekaService
-       command: mvn clean spring-boot:run
-       
-       
-    about:
-       build: 
-            context: ./UsersInfoService
-            dockerfile: Dockerfile
-       image: olejiksin/users
-       working_dir: /UsersInfoService
-       restart: on-failure
-       volumes:
-         - ./UsersInfoService:/UsersInfoService
-       ports: 
-            - 8040:8040
-       depends_on:
-            - postgres
-            - zuul
-            - EurekaService
-       command: mvn clean spring-boot:run   
-       
-   
-    country:
-        build: 
-            context: ./CountriesService
-            dockerfile: Dockerfile
-        image: olejiksin/country
-        restart: on-failure
-        volumes:
-          - ./CountriesService:/CountriesService
-        ports:
-            - 8030:8030
-        command: mvn clean spring-boot:run
-        depends_on: 
-            - postgres
-            - zuul
-            - EurekaService
             
+    front:
+        build: 
+            context: ./frontStomp
+            dockerfile: Dockerfile
+        image: olejiksin/frontstomp
+        volumes:
+          - ./frontStomp:/usr/src/app
+        ports:
+            - 3000:3000
+        command: npm start
+        depends_on: 
+            - back
+            - zuul
+            - EurekaService
+    
+    
+    back:
+        build: 
+            context: ./backStomp
+            dockerfile: Dockerfile
+        image: olejiksin/backstomp
+        working_dir: /backStomp
+        volumes:
+         - ./backStomp:/backStomp
+        ports: 
+            - 8070:8070
+        depends_on:
+            - postgres
+            - zuul
+            - EurekaService
+        command: mvn clean spring-boot:run
+    
     
     EurekaService:
         build: 

@@ -1,6 +1,7 @@
 package ru.itis.gateway.app;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import springfox.documentation.swagger.web.SwaggerResource;
@@ -20,6 +21,8 @@ public class DocumentationController implements SwaggerResourcesProvider {
         resources.add(swaggerResource("user", "/api/cat/v2/api-docs", "2.0"));
         resources.add(swaggerResource("country", "/api/country/v2/api-docs", "2.0"));
         resources.add(swaggerResource("about", "/api/about/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("stomp", "/api/stomp/v2/api-docs", "2.0"));
+
         return resources;
     }
  

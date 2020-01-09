@@ -1,3 +1,8 @@
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 50000
+ribbon:
+    ConnectTimeout: 10000
+    ReadTimeout: 50000
+
 zuul:
   prefix: /api
   routes:
@@ -9,4 +14,8 @@ zuul:
       serviceId: country
     about:
       path: /about/**
-      servcieId: about
+      serviceId: about
+    stomp:
+      path: /stomp/**
+      serviceId: stomp
+  ignored-services: "*"
