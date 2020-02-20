@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './index.css';
 import Chat from './App';
+import Log from './log'
 import * as serviceWorker from './serviceWorker';
 
 const Greet = () => (

@@ -22,7 +22,7 @@ class Chat extends Component {
             };
             websocket.onopen=function () {
                 alert("noice");
-            }
+            };
         fetch(`/room`)
             .then(response => {
                 return response.json();
