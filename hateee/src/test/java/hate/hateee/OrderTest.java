@@ -6,6 +6,7 @@ import hate.hateee.mdls.*;
 import hate.hateee.reps.CarRep;
 import hate.hateee.reps.ClientRep;
 import hate.hateee.reps.DriverRep;
+import hate.hateee.reps.ItemsRep;
 import hate.hateee.services.OrderServ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -41,6 +44,10 @@ public class OrderTest {
     private ObjectMapper mapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    @MockBean
+    private ItemsRep itemsRep;
 
     @MockBean
     @Autowired
@@ -77,8 +84,12 @@ public class OrderTest {
                 .andExpect(jsonPath("$.status").value(newOrder().getStatus()))
 //                .andExpect(jsonPath("$.driver").value(newOrder().getDriver()))
 //                .andExpect(jsonPath("$.client").value(newOrder().getClient()))
-//                .andExpect(jsonPath("$.items").value(newOrder().getItems()))
-//                .andExpect(jsonPath("$.orderdate").value(newOrder().getOrderdate()))
+                .andExpect(jsonPath("$.items[0].id").value(newOrder().getItems().get(0).getId()))
+                .andExpect(jsonPath("$.items[0].count").value(newOrder().getItems().get(0).getCount()))
+                .andExpect(jsonPath("$.items[0].name").value(newOrder().getItems().get(0).getName()))
+                .andExpect(jsonPath("$.items[0].orders").value(newOrder().getItems().get(0).getOrders()))
+                .andExpect(jsonPath("$.items[0].price").value(newOrder().getItems().get(0).getPrice()))
+                .andExpect(jsonPath("$.orderdate").value(newOrder().getOrderdate()))
                 .andDo(document("orders_status", responseFields(
                         fieldWithPath("id").description("Order id"),
                         fieldWithPath("status").description("Order status"),
@@ -89,7 +100,11 @@ public class OrderTest {
                         fieldWithPath("orderdate").description("Date of order"),
 //                        fieldWithPath("client").description("Email and etc."),
 //                        fieldWithPath("driver").description("Driver of order"),
-                        fieldWithPath("items").description("Items in order")
+                        fieldWithPath("items[0].id").description("Item id in order"),
+                        fieldWithPath("items[0].name").description("Name of  each item in order"),
+                        fieldWithPath("items[0].price").description("Price of each item in order"),
+                        fieldWithPath("items[0].count").description("Count of each item in order"),
+                        fieldWithPath("items[0].orders").description("In which order this item (list)")
                 )));
 
     }
@@ -105,13 +120,14 @@ public class OrderTest {
 //                .driver(Driver.builder().id(1L).build())
 //                .client(Client.builder().id(1L).build())
                 .orderdate(Timestamp.valueOf("2020-03-22 02:02:02.000000"))
-//                .items(list())
+                .items(list())
                 .build();
     }
 
-    private List<Items> list(){
-        List<Items> list=new ArrayList<>();
-        list.add(Items.builder().id(1L).build());
+    private List<Items> list() {
+        List<Items> list = new ArrayList<>();
+        list.add(Items.builder().id(1L).name("lskdfs").build());
         return list;
+//        return itemsRep.getItemsByOrdersOrderById(1L);
     }
 }

@@ -26,6 +26,9 @@ public class Items {
     @Column
     private Integer count;
 
-    @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "order_item",
+    inverseJoinColumns ={@JoinColumn(name="orderid")},
+    joinColumns = {@JoinColumn(name="itemid")})
     private List<Order> orders ;
 }

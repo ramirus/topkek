@@ -36,17 +36,17 @@ public class Order {
     @Column
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "driverid", nullable = false)
     @JsonIgnore
     private Driver driver;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "clientid", nullable = false)
     @JsonIgnore
     private Client client;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(name = "order_item",
             joinColumns = {@JoinColumn(name = "orderid")},
             inverseJoinColumns = {@JoinColumn(name = "itemid")})
