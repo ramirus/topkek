@@ -1,0 +1,17 @@
+= Documentation
+
+== Methods
+
+=== Changing status order
+
+Statuses of orders: on the way, delivered, waiting to send
+
+.request
+include::{snippets}/orders_status/http-request.adoc[]
+
+.response
+include::{snippets}/orders_status/http-response.adoc[]
+
+.response-fields
+include::{snippets}/orders_status/response-fields.adoc[]
+
