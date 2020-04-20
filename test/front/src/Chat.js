@@ -45,7 +45,7 @@ class Chat extends Component {
         axios.delete(`/chat/${this.props.match.params.user}`)
             .catch((err) => {
                 console.log(err);
-            });;
+            });
     };
 
     send = (user, text) => {

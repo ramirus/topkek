@@ -12,4 +12,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface ItemsRep  extends JpaRepository<Items, Long> {
 
+    @Query("from Items ")
+    List<Items> getAll();
 }

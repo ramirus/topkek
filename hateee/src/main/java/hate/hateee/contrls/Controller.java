@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hate.hateee.forms.Status;
 import hate.hateee.mdls.Order;
+import hate.hateee.reps.DriverRep;
 import hate.hateee.reps.ItemsRep;
 import hate.hateee.services.OrderServ;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,8 @@ public class Controller {
     private OrderServ orderServ;
 
     @Autowired
+    private DriverRep driverRep;
+    @Autowired
     private ItemsRep itemsRep;
 
     @RequestMapping(value = "/orders/{order_id}", method = RequestMethod.PUT)
@@ -27,12 +30,7 @@ public class Controller {
     public Order changeStatus(@PathVariable("order_id") Long orderId, @RequestBody Status status) throws JsonProcessingException {
         Order order=orderServ.changeStatus(orderId, status.getStatus());
         System.out.println(mapper.writeValueAsString(order));
-        System.out.println(mapper.writeValueAsString(itemsRep.findAll()));
         return order;
-//        return ResponseEntity.ok(
-//                new EntityModel<>
-//                        ()
-//        );
 
     }
 

@@ -7,7 +7,6 @@ import Chat from './Chat';
 import * as serviceWorker from './serviceWorker';
 import {storeGlob} from './storeConf';
 import {Provider} from 'react-redux';
-
 const Test = () => (
         <Switch>
             <Route exact path='/login' component={Login}/>

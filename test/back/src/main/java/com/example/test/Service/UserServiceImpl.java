@@ -51,4 +51,5 @@ public class UserServiceImpl implements UserService {
     public void logout(String name) {
         userRepository.deleteUserByName(name);
     }
+
 }

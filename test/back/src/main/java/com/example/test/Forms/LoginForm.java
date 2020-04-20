@@ -13,4 +13,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginForm {
     private String name;
+    private String password;
 }

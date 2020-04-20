@@ -33,11 +33,9 @@ public class TestData {
     vars = new HashMap<String, Object>();
     mapper = new ObjectMapper();
   }
+
 @DataProvider(name="data-provider")
-
 public Object[][] dataProviderMethod() throws IOException {
-
-
   List<User> list=new ArrayList<>();
     int n=15;
     for(int i=0;i<3;i++){
