@@ -22,8 +22,8 @@ public class ChatController {
     private UserServiceImpl userService;
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @GetMapping("/chat/{user}")
-    public ChatDto loadChatPage(@PathVariable("user") String name) {
+    @GetMapping("/chat")
+    public ChatDto loadChatPage() {
         return ChatDto.builder()
                 .messageDtoList(messageService.getAllMessages())
                 .onlineUserList(userService.getAllOnlineUsers())

@@ -1,24 +1,20 @@
 import {Component} from "react";
 import React from "react";
 
-export default class Messages extends Component {
-
-    click = () => {
-      this.props.sendMessages("sdfsdfs");
-    };
+export default class OnlineUsers extends Component {
 
     render() {
-        const mes = this.props.mes.map((message, index) =>
+        const onlineUsers = this.props.users.map((name, index) =>
             <div key={index}>
                 <ul>
+                    <li>{name}</li>
                     <br/>
-                    <li>{message.user}:{message.message}</li>
                 </ul>
             </div>);
 
         return (
             <div>
-                {mes}
+                {onlineUsers}
             </div>
         )
     }

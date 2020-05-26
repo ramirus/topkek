@@ -1,0 +1,4 @@
+export const UPDATE_MESS='UPDATE_MESS';
+export const MESS_STARTED='MESS_STARTED';
+export const MESS_SUCCESS='MESS_SUCCESS';
+export const MESS_ERROR='MESS_ERROR';

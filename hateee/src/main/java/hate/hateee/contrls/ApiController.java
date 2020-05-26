@@ -23,6 +23,7 @@ public class ApiController {
 
     @Autowired
     private AllDataService allDataService;
+
     @GetMapping(value = "/restapi", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<RestSimpleData> getAll() {
         return service.getAll();
