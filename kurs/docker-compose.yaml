@@ -1,0 +1,46 @@
+version: '3'
+services:
+        
+    postgres:
+        image: olejiksin/postgres
+        restart: on-failure
+        build:
+            context: ./postgresql
+            dockerfile: Dockerfile
+        volumes:
+          - ./data:/var/lib/postgresql/data 
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+          PGDATA: 
+             ./data
+        ports:
+          - 5432
+    
+            
+
+    back:
+        build: 
+            context: ./back
+            dockerfile: Dockerfile
+        image: olejiksin/back
+        working_dir: /back
+        volumes:
+         - ./backStomp:/back
+        ports: 
+            - 8070:8070
+        depends_on:
+            - postgres
+            - rabbit
+        command: mvn clean spring-boot:run
+    
+    
+    rabbit:
+        container_name: rabbit
+        image: rabbitmq:3-management
+        ports:
+            - 15672:15672
+            - 5672:5672
+            - 5673:5673
+            
