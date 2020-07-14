@@ -37,4 +37,9 @@ public class ParkingController {
     public Flux<ParkingSlot> getAll() {
         return service.getAll();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/available", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Flux<ParkingSlot> getAllAvailable() {
+        return service.getAllAv();
+    }
 }

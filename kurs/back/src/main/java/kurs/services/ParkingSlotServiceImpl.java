@@ -10,8 +10,14 @@ import reactor.core.publisher.Flux;
 public class ParkingSlotServiceImpl implements ParkingSlotService {
     @Autowired
     private ParkingSlotRep rep;
+
     @Override
     public Flux<ParkingSlot> getAll() {
-        return rep.getAll();
+        return Flux.fromIterable(rep.getAll());
+    }
+
+    @Override
+    public Flux<ParkingSlot> getAllAv() {
+        return Flux.fromIterable(rep.getAllAv());
     }
 }

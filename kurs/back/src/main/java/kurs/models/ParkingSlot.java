@@ -35,8 +35,9 @@ public class ParkingSlot implements Serializable {
     @Column
     @JsonProperty
     private Integer price_per_hour;
-    @Column
     @JsonProperty
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private SlotsStatus slotsStatus;
     @Column
     @JsonProperty

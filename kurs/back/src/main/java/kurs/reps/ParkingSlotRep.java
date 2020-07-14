@@ -19,7 +19,12 @@ public interface ParkingSlotRep extends JpaRepository<ParkingSlot, Long> {
     @Transactional
     @Query("from ParkingSlot ")
     @RestResource(rel = "getAll", path = "all")
-    Flux<ParkingSlot> getAll();
+    List<ParkingSlot> getAll();
+
+    @Transactional
+    @Query(nativeQuery = true, value = "select * from parking_slot where status='available'")
+    @RestResource(rel = "getAllAv", path = "getAvailable")
+    List<ParkingSlot> getAllAv();
 
     @Modifying
     @Query("delete  from ParkingSlot slot where slot.id=:id")
@@ -31,7 +36,7 @@ public interface ParkingSlotRep extends JpaRepository<ParkingSlot, Long> {
     @Modifying
     @RestResource(rel = "updateSlotStatus", path = "updateStatus")
     @Query("update  ParkingSlot  set  slotsStatus=:slotsStatus where id=:id")
-    void updateSlotStatus(@Param("slotsStatus") SlotsStatus slotsStatus, @Param("id") Long id);
+    void updateSlotStatus(SlotsStatus slotsStatus, @Param("id") Long id);
 
     @Transactional
     @Modifying

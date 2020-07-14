@@ -16,6 +16,7 @@ export function reducer(state = chatState, action) {
             }
         }
         case MESS_SUCCESS: {
+            console.log('get')
             return {
                 ...state,
                 messages: action.payload.messageDtoList,
@@ -24,8 +25,13 @@ export function reducer(state = chatState, action) {
             }
         }
         case UPDATE_MESS:
+            console.log("payload");
+            console.log([state.messages,action.payload.message]);
+            console.log(state.messages[0]);
+            state.messages[0].message='KEKE';
             return {
-                ...state, messages: [...state.messages, action.payload]
+                ...state,
+                messages: [...state.messages, action.payload]
             };
         case MESS_ERROR: {
             return {

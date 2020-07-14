@@ -37,7 +37,6 @@ public class RegAuthContr {
                 .build();
     }
 
-
     @GetMapping("/user/{login}")
     public UserDto userProfilePage(@PathVariable("login") String login) {
         User u = userRep.findByLogin(login);

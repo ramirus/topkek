@@ -16,21 +16,25 @@ export const getMess = () => {
 
 export const sendMessages = (user, message) => {
     let data = {
-        user: user,
-        message: message
+        // user: user,
+        message: message,
+        // loading:"kekos"
     };
+    console.log("data");
     console.log(data);
-    return dispatch => {
-        axios.post(`/chat/${user}`, data)
-            .then((res) => {
-                console.log(res.data);
-                dispatch(updateMessages(data));
-            })
-            .catch((err) => {
-                console.log(err);
-                dispatch(getError(err.message));
-            });
-    };
+    return dispatch=>{dispatch(updateMessages(data))};
+    // return dispatch => {
+    //     axios.post(`/chat/${user}`, data)
+    //         .then((res) => {
+    //             console.log("res");
+    //             console.log(res.data);
+    //             dispatch(updateMessages(data));
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //             dispatch(getError(err.message));
+    //         });
+    // };
 };
 export const logout = (user) => {
     return dispatch => {
