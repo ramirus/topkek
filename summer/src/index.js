@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './css/index.css';
+import './css/login-reg.css';
+import './css/profile.css';
 import Login from './containers/Login';
 import SignUp from './components/SignUp';
 import * as serviceWorker from './serviceWorker';
@@ -12,8 +14,8 @@ import Profile from './containers/Profile'
 const App = () => (
     <Switch>
         <Route path='/login' component={Login}/>
-        <Route path='/reg' component={SignUp}/>
-        <Route path='/profile' component={Profile}/>
+        <Route path='/signUp' component={SignUp}/>
+        <Route path='/api/application' component={Profile}/>
     </Switch>
 );
 

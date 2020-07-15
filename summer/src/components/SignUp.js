@@ -9,42 +9,42 @@ export default class SignUp extends Component {
         super(props);
         this.state = {
             username: '',
-            password: '',
-            email: ''
+            password: ''
         }
     }
 
     submit = () => {
-        const {username, password, email} = this.state;
+        const {username, password} = this.state;
         let data = {
-            username: username,
-            password: password,
-            email: email
+            login: username,
+            password: password
+            // email: email
         };
-        axios.post(`/reg/`, data)
-            .then((res) => {
+        axios.post(`/signUp/`, data)
+            .then(() => {
             })
             .catch((err) => {
+                console.log(err);
                 alert("Alarm")
             });
     };
 
     render() {
         return (
-            <div>
-                <label>Username</label>
+            <div className={'reg'}>
+                <label className={'log-label'}>Username</label>
                 <br/>
-                <input name={"username"} id={"username"}
+                <input className={'text-input'} type={'text'} name={"username"} id={"username"}
                        onChange={(event) => this.setState({username: event.target.value})}/>
-                <label>Password</label>
+                <label className={'log-label'}>Password</label>
                 <br/>
-                <input name={"password"} id={"password"}
+                <input className={'text-input'} type={'password'} name={"password"} id={"password"}
                        onChange={(event) => this.setState({password: event.target.value})}/>
-                <label>Email</label>
+                <label className={'log-label'}>Email</label>
                 <br/>
-                <input name={"email"} id={"email"}
-                       onChange={(event) => this.setState({email: event.target.value})}/>
-                <Link onClick={() => {
+                {/*<input className={'text-input'} type={'text'} name={"email"} id={"email"}*/}
+                {/*onChange={(event) => this.setState({email: event.target.value})}/>*/}
+                <Link className={"log-reg-btn"} onClick={() => {
                     this.submit()
                 }} to={"/login/"}>Next</Link>
             </div>);

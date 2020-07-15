@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
     ADD_COPY_INSTANCE,
-    ADD_INSTANCE,
+    ADD_INSTANCE, DELETE_SERVICE,
     ERROR,
     LOGOUT,
     START_SERVICE,
@@ -13,12 +13,13 @@ import {
 
 export const logIn = (username, password) => {
     let data = {
-        username: username,
+        login: username,
         password: password
     };
     return dispatch => {
         axios.post(`/login`, data)
-            .then(() => {
+            .then((response) => {
+                data.token = response.data;
                 dispatch(SuccessAuth(data))
             })
             .catch((error) => {
@@ -27,18 +28,9 @@ export const logIn = (username, password) => {
     };
 };
 
-// export const logOut = (data) => {
-//     return {
-//         type:LOGOUT,
-//         payload:{
-//             ...data
-//         }
-//     }
-// };
-
-export const getServices = () => {
+export const getServices = (username) => {
     return dispatch => {
-        axios.get(`/profile`)
+        axios.get(`/api/application/userName?userName=${username}`)
             .then(response => {
                 dispatch(SuccessActive(response.data));
             })
@@ -54,7 +46,7 @@ export const addCopyOfInstance = (username, instanceId) => {
         instanceId: instanceId
     };
     return dispatch => {
-        axios.post(`/`, data)
+        axios.post(`/api/application`, data)
             .then((response) => {
                 dispatch(copyOfInstance(response.data))
             })
@@ -63,14 +55,13 @@ export const addCopyOfInstance = (username, instanceId) => {
             });
     };
 };
-export const addNewInstance = (type, git, username) => {
+export const addNewInstance = (git, username) => {
     let data = {
-        type: type,
-        git: git,
-        username: username
+        gitUrl: git,
+        ownerName: username
     };
     return dispatch => {
-        axios.post(`/`, data)
+        axios.post(`/api/application`, data)
             .then((response) => {
                 dispatch(newInstance(response.data))
             })
@@ -79,26 +70,40 @@ export const addNewInstance = (type, git, username) => {
             });
     };
 };
+export const deleteService = (username, instanceId) => {
+    let data = {
+        instanceId: instanceId
+    }
+    return dispatch => {
+        axios.delete(`/api/application/${instanceId}`)
+            .then(() => {
+                dispatch(deleteServ(data))
+            })
+            .catch((error) => {
+                dispatch(Error(error.message));
+            });
+    };
+};
 export const stopService = (username, instanceId) => {
     let data = {
-        username: username, instanceId: instanceId
+        instanceId: instanceId
     };
     return dispatch => {
-        axios.post(`/`, data)
+        axios.put(`/api/application/${instanceId}`)
             .then(() => {
                 dispatch(stopServ(data))
             })
             .catch((error) => {
                 dispatch(Error(error.message));
             });
-    }
+    };
 };
 export const startService = (username, instanceId) => {
     let data = {
-        username: username, instanceId: instanceId
+        instanceId: instanceId
     };
     return dispatch => {
-        axios.post(`/`, data)
+        axios.put(`/api/application/${instanceId}`)
             .then(() => {
                 dispatch(startServ(data))
             })
@@ -107,6 +112,15 @@ export const startService = (username, instanceId) => {
             });
     }
 };
+
+export const deleteServ=(data)=>{
+    return{
+        type:DELETE_SERVICE,
+        payload:{
+            ...data
+        }
+    }
+}
 export const startServ = (data) => {
     return {
         type: START_SERVICE,
@@ -139,7 +153,7 @@ export const stopServ = (data) => {
         }
     }
 };
-export const SuccessAuth = (data) => {
+export const SuccessAuth = (data, token) => {
     return {
         type: SUCCESS_AUTH,
         payload: {

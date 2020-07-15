@@ -1,6 +1,6 @@
 import {
     ADD_COPY_INSTANCE,
-    ADD_INSTANCE,
+    ADD_INSTANCE, DELETE_SERVICE,
     ERROR,
     START_SERVICE,
     STOP_INSTANCE,
@@ -11,7 +11,8 @@ import {
 export const State = {
     username: null,
     services: [],
-    error: null
+    error: null,
+    token: null
 };
 
 export function reducer(state = State, action) {
@@ -50,10 +51,24 @@ export function reducer(state = State, action) {
                 services: [...state.services]
             }
         }
+        case DELETE_SERVICE: {
+            let arr = state.services;
+            for (let i = 0; i < state.services.length; i++) {
+                if (state.services[i].instanceId === action.payload.instanceId) {
+                    arr.splice(i, 1);
+                    state.services = arr;
+                }
+            }
+            return {
+                ...state,
+                services: [...state.services]
+            }
+        }
         case SUCCESS_AUTH: {
             return {
                 ...state,
-                username: action.payload.username
+                username: action.payload.login,
+                token: action.payload.token
             }
         }
         case SUCCESS: {

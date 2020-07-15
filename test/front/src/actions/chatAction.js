@@ -22,6 +22,8 @@ export const sendMessages = (user, message) => {
     };
     console.log("data");
     console.log(data);
+    data.kek="kek";
+    console.log(data);
     return dispatch=>{dispatch(updateMessages(data))};
     // return dispatch => {
     //     axios.post(`/chat/${user}`, data)

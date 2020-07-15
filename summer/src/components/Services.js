@@ -3,30 +3,47 @@ import React from "react";
 
 export default class Services extends Component {
     render() {
-        const {stopService, addCopyOfInstance, startService, username} = this.props;
-        const {services} = this.props.services.map((service, index) =>
+        const {stopService, addCopyOfInstance, startService, username, deleteService, services} = this.props;
+        const {serv} = services.map((service, index) =>
             <div key={index}>
                 <tr>
                     <td>{service.name}</td>
                     <td>{service.url}</td>
                     <td>{service.status}</td>
                     <td>
-                        <button onClick={() => addCopyOfInstance(username, service.instanceId)}>Add copy</button>
-                        {service.status === 'active' ?
-                            <button onClick={() => stopService(username, service.instanceId)}>Stop</button>
-                            : < button onClick={() => startService(username, service.instanceId)}>Start</button>
-                        }
+                        <button className={'btn'} onClick={() => addCopyOfInstance(username)}>Add copy</button>
+                    </td>
+                    {service.status === 'active' ?
+                        <td>
+                            <button className={'btn'} style={{color: 'darkred'}}
+                                    onClick={() => stopService(username)}>Stop
+                            </button>
+                        </td>
+                        :
+                        <td>
+                            < button className={'btn'} style={{color: 'green'}}
+                                     onClick={() => startService(username)}>Start
+                            </button>
+                        </td>}
+                    <td>
+                        <button className={'btn'} onClick={() => deleteService(username)}>Delete</button>
                     </td>
                 </tr>
             </div>);
+
         return (
             <div>
-                <table>
+                <table className={'table'}>
+                    <tbody>
+                    <tr>Your active services:</tr>
+                    <br/>
                     <tr>
-                        <th>Microservice</th>
-                        <th>Status</th>
+                        <td>Microservice name</td>
+                        <td>URL</td>
+                        <td>Status</td>
                     </tr>
-                    {services}
+                    {serv}
+                    </tbody>
                 </table>
             </div>
         );
