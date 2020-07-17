@@ -1,4 +1,4 @@
-FROM alpine-node:11
+FROM node:current-alpine3.11
 
 COPY  . /usr/src/app
 WORKDIR /usr/src/app

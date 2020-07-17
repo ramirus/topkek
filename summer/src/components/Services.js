@@ -30,7 +30,6 @@ export default class Services extends Component {
                     </td>
                 </tr>
             </div>);
-
         return (
             <div>
                 <table className={'table'}>

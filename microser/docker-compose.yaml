@@ -21,11 +21,11 @@ services:
             
     front:
         build: 
-            context: ./frontStomp
+            context: ./
             dockerfile: Dockerfile
         image: olejiksin/frontstomp
         volumes:
-          - ./frontStomp:/usr/src/app
+          - ./:/usr/src/app
         ports:
             - 3000:3000
         command: npm start
