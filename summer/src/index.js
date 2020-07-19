@@ -15,7 +15,7 @@ const App = () => (
     <Switch>
         <Route path='/login' component={Login}/>
         <Route path='/signUp' component={SignUp}/>
-        <Route path='/api/application' component={Profile}/>
+        <Route path='/applications' component={Profile}/>
     </Switch>
 );
 

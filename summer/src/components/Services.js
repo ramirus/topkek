@@ -7,26 +7,26 @@ export default class Services extends Component {
         const {serv} = services.map((service, index) =>
             <div key={index}>
                 <tr>
-                    <td>{service.name}</td>
-                    <td>{service.url}</td>
+                    <td>{service.instanceName}</td>
+                    <td>{service.instanceUrl}</td>
                     <td>{service.status}</td>
                     <td>
-                        <button className={'btn'} onClick={() => addCopyOfInstance(username)}>Add copy</button>
+                        <button className={'btn'} onClick={() => addCopyOfInstance(service)}>Add copy</button>
                     </td>
                     {service.status === 'active' ?
                         <td>
                             <button className={'btn'} style={{color: 'darkred'}}
-                                    onClick={() => stopService(username)}>Stop
+                                    onClick={() => stopService(service.instanceId)}>Stop
                             </button>
                         </td>
                         :
                         <td>
                             < button className={'btn'} style={{color: 'green'}}
-                                     onClick={() => startService(username)}>Start
+                                     onClick={() => startService(service.instanceId)}>Start
                             </button>
                         </td>}
                     <td>
-                        <button className={'btn'} onClick={() => deleteService(username)}>Delete</button>
+                        <button className={'btn'} onClick={() => deleteService(service.instanceId)}>Delete</button>
                     </td>
                 </tr>
             </div>);

@@ -21,13 +21,13 @@ class Profile extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     if (this.props.username === null) {
-    //         this.props.history.push(`/login`);
-    //     }
-    //     const {getServices} = this.props;
-    //     getServices();
-    // }
+    componentDidMount() {
+        if (this.props.username === null) {
+            this.props.history.push(`/login`);
+        }
+        const {getServices} = this.props;
+        getServices(this.props.username);
+    }
 
     render() {
         const {stopService, username, addNewInstance, services, addCopyOfInstance, startService,deleteService} = this.props;
@@ -54,7 +54,7 @@ class Profile extends Component {
                     {/*</select>*/}
                     {/*<br/>*/}
                     <button className={'btn'} style={{width:'200px'}} onClick={() => addNewInstance( this.state.github, username)}>Add new
-                        Instance
+                        app
                     </button>
                 </form>
                 <br/>
@@ -75,9 +75,9 @@ const mapDispatchToProps = dispatch => ({
     // logOut: (username) => dispatch(logOut(username)),
     addNewInstance: (git, username) => dispatch(addNewInstance(git, username)),
     getServices: (username) => dispatch(getServices(username)),
-    stopService: (username, instanceId) => dispatch(stopService(username, instanceId)),
-    addCopyOfInstance: (username, instanceId) => dispatch(addCopyOfInstance(username, instanceId)),
-    startService: (username, instanceId) => dispatch(startService(username, instanceId)),
+    stopService: (instanceId) => dispatch(stopService(instanceId)),
+    addCopyOfInstance: (instance) => dispatch(addCopyOfInstance(instance)),
+    startService: (instanceId) => dispatch(startService(instanceId)),
     deleteService:(instanceId)=>dispatch(deleteService(instanceId))
 });
 

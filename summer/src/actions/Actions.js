@@ -30,7 +30,7 @@ export const logIn = (username, password) => {
 
 export const getServices = (username) => {
     return dispatch => {
-        axios.get(`/api/application/userName?userName=${username}`)
+        axios.get(`/applications/${username}`)
             .then(response => {
                 dispatch(SuccessActive(response.data));
             })
@@ -40,11 +40,8 @@ export const getServices = (username) => {
     };
 };
 
-export const addCopyOfInstance = (username, instanceId) => {
-    let data = {
-        username: username,
-        instanceId: instanceId
-    };
+export const addCopyOfInstance = (data) => {
+
     return dispatch => {
         axios.post(`/api/application`, data)
             .then((response) => {
@@ -70,12 +67,12 @@ export const addNewInstance = (git, username) => {
             });
     };
 };
-export const deleteService = (username, instanceId) => {
+export const deleteService = (instanceId) => {
     let data = {
         instanceId: instanceId
     }
     return dispatch => {
-        axios.delete(`/api/application/${instanceId}`)
+        axios.delete(`/applications/${instanceId}`)
             .then(() => {
                 dispatch(deleteServ(data))
             })
@@ -84,12 +81,12 @@ export const deleteService = (username, instanceId) => {
             });
     };
 };
-export const stopService = (username, instanceId) => {
+export const stopService = (instanceId) => {
     let data = {
         instanceId: instanceId
     };
     return dispatch => {
-        axios.put(`/api/application/${instanceId}`)
+        axios.put(`/applications/stop/${instanceId}`)
             .then(() => {
                 dispatch(stopServ(data))
             })
@@ -98,12 +95,12 @@ export const stopService = (username, instanceId) => {
             });
     };
 };
-export const startService = (username, instanceId) => {
+export const startService = (instanceId) => {
     let data = {
         instanceId: instanceId
     };
     return dispatch => {
-        axios.put(`/api/application/${instanceId}`)
+        axios.put(`/applications/start/${instanceId}`)
             .then(() => {
                 dispatch(startServ(data))
             })
