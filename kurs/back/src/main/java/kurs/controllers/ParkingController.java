@@ -1,5 +1,7 @@
 package kurs.controllers;
 
+import kurs.models.Token;
+import kurs.reps.TokenRep;
 import kurs.services.ParkingSlotService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,16 @@ import reactor.core.publisher.Flux;
 public class ParkingController {
 
     @Autowired
+    private TokenRep tokenRep;
+    @Autowired
     private ParkingSlotService service;
     @Autowired
     AmqpTemplate template;
 
+    @RequestMapping(path = "/tokenn",method = RequestMethod.GET)
+    public Token gett() {
+        return tokenRep.findFirstByUsverId(1L).get();
+    }
     @RequestMapping(path = "/slot/search/updateStatus", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateStatus(@RequestBody ParkingSlot slot) {
         template.convertAndSend("queue", slot);

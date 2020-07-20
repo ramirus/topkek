@@ -28,7 +28,7 @@ class Login extends Component {
                            onChange={(event) => this.setState({password: event.target.value})}
                            name={'password'}/>
                     <Link className={"log-reg-btn"} onClick={logIn(username, this.state.passive)}
-                          to={`/api/application/userName?userName=${username}`}> Next</Link>
+                          to={`/applications/${username}`}> Next</Link>
                 </div>
             </div>);
     }

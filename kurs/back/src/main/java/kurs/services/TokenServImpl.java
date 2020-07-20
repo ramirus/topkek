@@ -23,7 +23,7 @@ public class TokenServImpl implements TokenServ {
     }
     @Override
     public Optional<Token> findFirstByUser(String email){
-        return tokenRep.findFirstByUserId(userRep.findByEmail(email).get().getId()) ;
+        return tokenRep.findFirstByUsverId(userRep.findByEmail(email).get().getId()) ;
     }
 
 

@@ -11,7 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import kurs.models.Token;
-import kurs.models.User;
+import kurs.models.Usver;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -34,14 +34,14 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public String reg(RegForm regForm) {
         if ((userRep.findByEmail(regForm.getEmail()).isPresent() && userRep.findByLogin(regForm.getLogin()) == null)) {
-            User user = User.builder()
+            Usver usver = Usver.builder()
                     .name(regForm.getName())
                     .surname(regForm.getSurname())
                     .hash(passwordEncoder.encode(regForm.getPassword()))
                     .phonenumber(regForm.getPhone())
                     .email(regForm.getEmail())
                     .build();
-            userRep.save(user);
+            userRep.save(usver);
             return "ok";
         } else {
             return "nope";
@@ -50,12 +50,12 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public TokenDto login(LoginForm loginForm) {
-        User user = userRep.findByLogin(loginForm.getLogin());
-        if (user == null) {
+        Usver usver = userRep.findByLogin(loginForm.getLogin());
+        if (usver == null) {
             return null;
-        } else if (passwordEncoder.matches(loginForm.getPassword(), user.getHash())) {
-            if (tokenServ.findFirstByUser(user.getEmail()).isPresent()) {
-                Token tok = tokenServ.findFirstByUser(user.getEmail()).get();
+        } else if (passwordEncoder.matches(loginForm.getPassword(), usver.getHash())) {
+            if (tokenServ.findFirstByUser(usver.getEmail()).isPresent()) {
+                Token tok = tokenServ.findFirstByUser(usver.getEmail()).get();
                 return TokenDto.from(tok.getValue());
             } else {
                 String value = UUID.randomUUID().toString();
@@ -63,7 +63,7 @@ public class UsersServiceImpl implements UsersService {
                         .createdAt(LocalDateTime.now())
                         .expiredDateTime(LocalDateTime.now().plusSeconds(expiredTime))
                         .value(value)
-                        .user(user)
+                        .usver(usver)
                         .build();
                 System.out.println(LocalDateTime.now() + ":now" + "    not now:" + LocalDateTime.now().plusSeconds(expiredTime));
                 tokenRep.save(token);

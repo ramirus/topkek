@@ -1,5 +1,6 @@
 package kurs.reps;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import kurs.models.Token;
@@ -13,7 +14,8 @@ public interface TokenRep extends CrudRepository<Token, Long> {
 
     void deleteTokensByExpiredDateTimeBefore(LocalDateTime time);
 
-    Optional<Token> findFirstByUserId(Long id);
+//    @Query("from Token  t where  t.usver=:id")
+    Optional<Token> findFirstByUsverId(Long id);
 
 
 }

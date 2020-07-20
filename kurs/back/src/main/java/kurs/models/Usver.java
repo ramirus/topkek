@@ -11,9 +11,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "usver")
 @Data
-public class User {
+public class Usver {
 
     @Id
     @GeneratedValue
@@ -24,8 +24,6 @@ public class User {
     private String surname;
     @Column
     private String phonenumber;
-    @Column
-    private Roles role;
     @Column
     private String email;
     @Column

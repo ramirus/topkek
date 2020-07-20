@@ -8,7 +8,7 @@ import kurs.reps.UserRep;
 import kurs.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import kurs.models.User;
+import kurs.models.Usver;
 import kurs.dto.UserAfterLoginDto;
 import kurs.dto.UserDto;
 
@@ -39,14 +39,13 @@ public class RegAuthContr {
 
     @GetMapping("/user/{login}")
     public UserDto userProfilePage(@PathVariable("login") String login) {
-        User u = userRep.findByLogin(login);
+        Usver u = userRep.findByLogin(login);
         return UserDto.builder()
                 .balance(u.getBalance())
                 .email(u.getEmail())
                 .name(u.getName())
                 .phonenumber(u.getPhonenumber())
                 .surname(u.getSurname())
-                .role(u.getRole())
                 .build();
     }
 }

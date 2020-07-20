@@ -18,7 +18,6 @@ export default class SignUp extends Component {
         let data = {
             login: username,
             password: password
-            // email: email
         };
         axios.post(`/signUp/`, data)
             .then(() => {
@@ -39,11 +38,7 @@ export default class SignUp extends Component {
                 <label className={'log-label'}>Password</label>
                 <br/>
                 <input className={'text-input'} type={'password'} name={"password"} id={"password"}
-                       onChange={(event) => this.setState({password: event.target.value})}/>
-                <label className={'log-label'}>Email</label>
-                <br/>
-                {/*<input className={'text-input'} type={'text'} name={"email"} id={"email"}*/}
-                {/*onChange={(event) => this.setState({email: event.target.value})}/>*/}
+                       onChange={(event) => this.setState({password: event.target.value})}/>                
                 <Link className={"log-reg-btn"} onClick={() => {
                     this.submit()
                 }} to={"/login/"}>Next</Link>

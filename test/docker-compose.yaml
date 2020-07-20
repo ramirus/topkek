@@ -3,6 +3,7 @@ services:
         
     postgres:
         image: olejiksin/postgres
+        restart: on-failure
         build:
             context: ./postgresql
             dockerfile: Dockerfile
@@ -17,33 +18,67 @@ services:
         ports:
           - 5432
     
-       
-    back:
-       build: 
-            context: ./back
-            dockerfile: Dockerfile
-       image: olejiksin/backe
-       working_dir: /back
-       volumes:
-         - ./back:/back
-       ports: 
-            - 8080:8080
-       depends_on:
-            - postgres
-       command: mvn clean spring-boot:run
-       
-       
-   
+            
     front:
         build: 
-            context: ./front
+            context: ./frontStomp
             dockerfile: Dockerfile
-        image: olejiksin/frontend
+        image: olejiksin/frontstomp
         volumes:
-          - ./front:/usr/src/app
+          - ./frontStomp:/usr/src/app
         ports:
             - 3000:3000
         command: npm start
         depends_on: 
             - back
+            - zuul
+            - EurekaService
+    
+    
+    back:
+        build: 
+            context: ./backStomp
+            dockerfile: Dockerfile
+        image: olejiksin/backstomp
+        working_dir: /backStomp
+        volumes:
+         - ./backStomp:/backStomp
+        ports: 
+            - 8070:8070
+        depends_on:
+            - postgres
+            - zuul
+            - EurekaService
+        command: mvn clean spring-boot:run
+    
+    
+    EurekaService:
+        build: 
+            context: ./ServiceRegistry
+            dockerfile: Dockerfile
+        image: olejiksin/service
+        restart: on-failure
+        volumes:
+          - ./ServiceRegistry:/ServiceRegistry
+        ports:
+            - 8761:8761
+        command: mvn clean spring-boot:run
+        depends_on: 
+            - postgres
+            
+    zuul:
+        build: 
+            context: ./ZuulService
+            dockerfile: Dockerfile
+        image: olejiksin/zuul
+        restart: on-failure
+        volumes:
+          - ./ZuulService:/ZuulService
+        ports:
+            - 8080:8080
+        command: mvn clean spring-boot:run
+        depends_on: 
+            - postgres
+            - EurekaService
+
     
