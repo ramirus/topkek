@@ -28,7 +28,7 @@ class Login extends Component {
                     <input className={'text-input'} type={"password"}
                            onChange={(event) => this.setState({password: event.target.value})}
                            name={'password'}/>
-                    <Link className={"log-reg-btn"} onClick={logIn(username, this.state.password)}
+                    <Link className={"log-reg-btn"} onClick={() => logIn(username, this.state.password)}
                           to={`/applications/${username}`}> Next</Link>
                 </div>
             </div>);
@@ -36,7 +36,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    logIn: (username, password) => dispatch(logIn(username, password))
+    logIn,
 });
 
 const mapStateToProps = store => {
