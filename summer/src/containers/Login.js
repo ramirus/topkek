@@ -15,7 +15,8 @@ class Login extends Component {
 
     render() {
         const {logIn} = this.props;
-        const {username} = this.state
+        const {username} = this.state;
+        console.log({username});
         return (
             <div>
                 <div className={'login'}>
@@ -27,7 +28,7 @@ class Login extends Component {
                     <input className={'text-input'} type={"password"}
                            onChange={(event) => this.setState({password: event.target.value})}
                            name={'password'}/>
-                    <Link className={"log-reg-btn"} onClick={logIn(username, this.state.passive)}
+                    <Link className={"log-reg-btn"} onClick={logIn(username, this.state.password)}
                           to={`/applications/${username}`}> Next</Link>
                 </div>
             </div>);
